@@ -1,0 +1,6 @@
+{
+  "name": "Dogclues",
+  "description": "Una guía editorial independiente para descubrir los mejores restaurantes, experiencias y negocios de Campeche.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
