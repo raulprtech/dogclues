@@ -1,12 +1,12 @@
-import React from 'react';
-import { Layout } from '../components/layout/Layout';
-import { SEO } from '../components/SEO';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = { title: 'Patrocinios y alianzas', description: 'Marcas que apoyan el periodismo local independiente sin intervenir en las huellas DogClues.' };
+
 import { Mail } from 'lucide-react';
 
 export default function PatrociniosPage() {
   return (
-    <Layout>
-      <SEO title="Patrocinios y Alianzas" />
+    <main>
       <div className="bg-ivory py-20 lg:py-32">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -77,6 +77,6 @@ export default function PatrociniosPage() {
           </div>
         </div>
       </div>
-    </Layout>
+    </main>
   );
 }

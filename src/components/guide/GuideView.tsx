@@ -1,9 +1,9 @@
+'use client';
+
 import React, { useState } from 'react';
-import { Layout } from '../components/layout/Layout';
-import { SEO } from '../components/SEO';
-import { GUIDE_EDITIONS, PLACES, CATEGORIES, SPONSORS } from '../lib/data';
+import { GUIDE_EDITIONS, PLACES, CATEGORIES, SPONSORS } from '../../lib/data';
 import { PawPrint, MapPin, Filter } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 export default function GuidePage() {
   const guide = GUIDE_EDITIONS[0]; // Assuming only one for the prototype
@@ -17,12 +17,7 @@ export default function GuidePage() {
     : places;
 
   return (
-    <Layout>
-      <SEO 
-        title={guide.title}
-        description={guide.description}
-        image={guide.coverImageUrl}
-      />
+    <main>
       
       {/* Cover Header */}
       <div className="relative h-[60vh] min-h-[500px] flex items-end">
@@ -61,7 +56,7 @@ export default function GuidePage() {
             <p className="text-sm text-deep-blue/70 mb-4 max-w-md">
               Evaluamos calidad, consistencia, servicio, relación calidad-precio y relevancia local.
             </p>
-            <Link to="/metodologia" className="text-terracotta text-sm font-medium hover:underline">
+            <Link href="/metodologia" className="text-terracotta text-sm font-medium hover:underline">
               Conocer criterios de evaluación &rarr;
             </Link>
           </div>
@@ -153,7 +148,7 @@ export default function GuidePage() {
                   
                   <div className="mt-auto pt-4 border-t border-deep-blue/10">
                     <Link 
-                      to={`/lugares/${place.slug}`}
+                      href={`/lugares/${place.slug}`}
                       className="text-terracotta text-sm font-medium hover:text-deep-blue transition-colors flex items-center gap-1"
                     >
                       Ver detalles
@@ -165,6 +160,6 @@ export default function GuidePage() {
           })}
         </div>
       </div>
-    </Layout>
+    </main>
   );
 }

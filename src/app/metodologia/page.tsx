@@ -1,12 +1,12 @@
-import React from 'react';
-import { Layout } from '../components/layout/Layout';
-import { SEO } from '../components/SEO';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = { title: 'Nuestra metodología', description: 'Cómo DogClues descubre, evalúa y reconoce los lugares que dejan huella en Campeche.' };
+
 import { PawPrint, ShieldCheck } from 'lucide-react';
 
 export default function MetodologiaPage() {
   return (
-    <Layout>
-      <SEO title="Nuestra Metodología" />
+    <main>
       <div className="bg-ivory py-20 lg:py-32">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -114,6 +114,6 @@ export default function MetodologiaPage() {
           </div>
         </div>
       </div>
-    </Layout>
+    </main>
   );
 }

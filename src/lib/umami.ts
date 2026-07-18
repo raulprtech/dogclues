@@ -10,7 +10,7 @@ export const trackEvent = (eventName: string, eventData?: Record<string, string 
       }
     } else {
       // Fallback/development logging
-      if (import.meta.env.DEV) {
+      if (process.env.NODE_ENV === 'development') {
         console.log(`[Umami Event Tracked]: ${eventName}`, eventData || '');
       }
     }
