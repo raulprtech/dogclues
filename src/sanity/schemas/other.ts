@@ -55,7 +55,7 @@ export const siteSettings = defineType({
 });
 
 export const terryContent = defineType({
-  name: 'terryContent', title: 'Terry Content', type: 'document',
+  name: 'terryContent', title: 'Contenido de la mascota', type: 'document',
   fields: [
     defineField({ name: 'title', title: 'Title', type: 'string' }),
     defineField({ name: 'content', title: 'Content', type: 'text' }),

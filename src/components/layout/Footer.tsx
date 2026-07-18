@@ -19,7 +19,7 @@ export function Footer() {
               <span className="font-serif font-bold text-2xl tracking-tight text-ivory">DogClues</span>
             </Link>
             <p className="text-sm text-ivory/70 leading-relaxed mb-6">
-              Una red de descubrimiento local guiada por el buen olfato de Terry. Empezamos en Campeche.
+              Una red de descubrimiento local guiada por el buen olfato y el criterio editorial. Empezamos en Campeche.
             </p>
             <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-ivory/60">
               <MapPin className="w-4 h-4 text-terracotta" /> Campeche, México

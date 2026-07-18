@@ -13,7 +13,7 @@ export default function ArticlesPage() {
     <main className="bg-ivory py-20 lg:py-28">
       <div className="site-shell">
         <header className="max-w-3xl mb-14">
-          <span className="eyebrow">El cuaderno de Terry</span>
+          <span className="eyebrow">El cuaderno de Campeche</span>
           <h1 className="font-serif text-5xl md:text-7xl font-semibold text-deep-blue leading-none mt-5 mb-6">
             Historias para seguirle la pista a Campeche.
           </h1>

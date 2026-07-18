@@ -77,7 +77,7 @@ export default function MetodologiaPage() {
             </div>
 
             <h2 className="font-serif text-3xl font-bold text-deep-blue mt-12 mb-6">El sistema de Huellas</h2>
-            <p>En lugar de estrellas, otorgamos las huellas de Terry a los lugares que alcanzan nuestros estándares:</p>
+            <p>En lugar de estrellas, otorgamos las huellas DogClues a los lugares que alcanzan nuestros estándares:</p>
             
             <div className="space-y-6 mt-8">
               <div className="flex gap-4 items-start">

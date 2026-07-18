@@ -9,7 +9,7 @@ export const CATEGORIES: Category[] = [
 ];
 
 export const AWARDS: Award[] = [
-  { id: 'hallazgo-terry', name: 'El hallazgo de Terry', description: 'El lugar favorito de nuestra mascota este mes.' },
+  { id: 'hallazgo-mes', name: 'El hallazgo del mes', description: 'El lugar favorito de nuestra mascota este mes.' },
   { id: 'tradicion', name: 'Guardián de la Tradición', description: 'Preserva los sabores auténticos de Campeche.' }
 ];
 
@@ -193,8 +193,8 @@ export const ARTICLES: Article[] = [
   },
   {
     id: 'art-6',
-    title: 'El hallazgo de Terry del mes',
-    slug: 'hallazgo-terry-mes',
+    title: 'El gran hallazgo del mes',
+    slug: 'gran-hallazgo-mes',
     categoryId: 'turismo',
     author: 'Equipo Dogclues',
     publishedAt: '2023-10-01',

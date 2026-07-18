@@ -4,7 +4,7 @@
 
 **DogClues** es una plataforma editorial de descubrimiento local que ayuda a encontrar restaurantes, experiencias, sitios turísticos, comercios y actividades que realmente vale la pena conocer.
 
-La identidad gira alrededor de **Terry**, un schnauzer sal y pimienta con buen olfato para descubrir lugares especiales, seguir pistas dentro de una ciudad y reconocer negocios con calidad, identidad o relevancia local.
+La identidad incorpora un schnauzer sal y pimienta con buen olfato para descubrir lugares especiales, seguir pistas dentro de una ciudad y reconocer negocios con calidad, identidad o relevancia local.
 
 La primera ciudad es **Campeche**. La visión es crecer desde una publicación local hasta una red nacional de guías, fichas verificadas, servicios comunitarios e inteligencia comercial.
 
@@ -17,7 +17,7 @@ DogClues no pretende ser un directorio exhaustivo ni una plataforma de reseñas 
 - Reconocimientos propios representados por huellas.
 - Participación futura de suscriptores verificados.
 - Separación estricta entre recomendaciones y publicidad.
-- Una identidad cercana y reconocible protagonizada por Terry.
+- Una identidad cercana y reconocible protagonizada por un schnauzer rastreador.
 
 ## Producto actual
 
@@ -106,7 +106,7 @@ El sitio funciona con contenido de demostración cuando estas variables no está
 ```text
 public/
   og.png
-  terry-campeche.png
+  schnauzer-campeche.png
 src/
   app/                  Rutas y metadatos de Next.js
   components/           Componentes editoriales y navegación

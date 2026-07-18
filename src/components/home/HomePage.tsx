@@ -84,8 +84,8 @@ export default function HomePage() {
             <span className="eyebrow eyebrow-light"><Compass /> Guía local independiente · Campeche</span>
             <h1>Buenas pistas.<br /><em>Mejores lugares.</em></h1>
             <p>
-              Terry olfatea la ciudad para encontrar esas mesas, rincones y experiencias
-              que dan ganas de recomendar en voz baja.
+              Nuestro schnauzer rastrea la ciudad para encontrar esas mesas, rincones y
+              experiencias que dan ganas de recomendar en voz baja.
             </p>
           </div>
 
@@ -132,7 +132,7 @@ export default function HomePage() {
         <div className="site-shell">
           <div className="section-heading">
             <div>
-              <span className="eyebrow"><PawPrint /> Selección de Terry</span>
+              <span className="eyebrow"><PawPrint /> Selección DogClues</span>
               <h2>Lugares con buena pista</h2>
               <p>Una primera selección probada con curiosidad, criterio y apetito.</p>
             </div>
@@ -226,7 +226,7 @@ export default function HomePage() {
           <div className="section-heading">
             <div>
               <span className="eyebrow"><Compass /> Sigue la pista que más te gusta</span>
-              <h2>El universo editorial de Terry</h2>
+              <h2>El universo editorial de DogClues</h2>
               <p>Seis maneras de mirar la ciudad, con la misma curiosidad y criterio local.</p>
             </div>
             <Link href="/articulos" className="text-link">Explorar historias <ArrowRight /></Link>
@@ -246,12 +246,12 @@ export default function HomePage() {
       <section className="terry-section">
         <div className="site-shell terry-grid">
           <div className="terry-portrait">
-            <img src="/terry-campeche.png" alt="Terry, schnauzer sal y pimienta y rastreador oficial de DogClues" />
-            <span className="terry-caption"><PawPrint /> Terry · Rastreador oficial</span>
+            <img src="/schnauzer-campeche.png" alt="Schnauzer sal y pimienta, rastreador oficial de DogClues" />
+            <span className="terry-caption"><PawPrint /> Rastreador oficial</span>
           </div>
           <div className="terry-copy">
             <span className="eyebrow"><PawPrint /> Conoce a tu guía</span>
-            <h2>Terry tiene nariz para <em>las buenas historias.</em></h2>
+            <h2>Nuestro guía tiene nariz para <em>las buenas historias.</em></h2>
             <p>
               Es schnauzer, campechano por adopción y enemigo de las recomendaciones tibias.
               Su misión es encontrar lugares con identidad: esos que cocinan, reciben y cuentan
@@ -299,7 +299,7 @@ export default function HomePage() {
             <p>Una recomendación bien elegida. Sin listas infinitas. Sin spam.</p>
           </div>
           {subscribed ? (
-            <div className="success-message"><PawPrint /> ¡Listo! Terry ya tiene tu dirección.</div>
+            <div className="success-message"><PawPrint /> ¡Listo! Ya tenemos tu dirección.</div>
           ) : (
             <form onSubmit={handleSubscribe} className="newsletter-form">
               <label className="sr-only" htmlFor="newsletter-email">Correo electrónico</label>

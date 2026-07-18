@@ -7,7 +7,7 @@ export default function NotFound() {
       <div>
         <PawPrint className="w-10 h-10 text-terracotta mx-auto mb-6" />
         <p className="eyebrow mb-4">Pista perdida</p>
-        <h1 className="font-serif text-5xl text-deep-blue mb-5">Terry no encontró esta página.</h1>
+        <h1 className="font-serif text-5xl text-deep-blue mb-5">No encontramos esta página.</h1>
         <p className="text-deep-blue/70 mb-8">Quizá la pista cambió de calle. Volvamos a Campeche.</p>
         <Link href="/" className="button button-coral">Regresar al inicio</Link>
       </div>

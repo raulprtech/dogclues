@@ -50,7 +50,7 @@ export default async function PlacePage({ params }: { params: Promise<{ slug: st
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <div>
-              <h2 className="font-serif text-2xl font-bold text-deep-blue mb-4">La pista de Terry</h2>
+              <h2 className="font-serif text-2xl font-bold text-deep-blue mb-4">Por qué vale la pena</h2>
               <p className="text-lg leading-relaxed text-deep-blue/80 mb-8">{place.description}</p>
               <div className="bg-soft-green/10 border border-soft-green/20 p-6 rounded-[18px]">
                 <strong className="text-deep-blue">Antes de ir</strong>
