@@ -81,40 +81,6 @@ Next.js genera HTML indexable y metadatos propios para cada guía, artículo y l
 | `/metodologia` | Criterios y sistema de huellas. |
 | `/patrocinios` | Formatos comerciales y política de independencia. |
 
-## Desarrollo local
-
-El repositorio se encuentra en la distribución WSL **Ubuntu**:
-
-```text
-\\wsl.localhost\Ubuntu\home\raulprtech\dogclues
-```
-
-Ruta Linux equivalente:
-
-```bash
-/home/raulprtech/dogclues
-```
-
-### Requisitos
-
-- Node.js 22.13 o superior.
-- npm 10 o superior.
-
-```bash
-nvm use
-npm install
-npm run dev
-```
-
-Abre [http://localhost:3000](http://localhost:3000).
-
-### Validación
-
-```bash
-npm run lint
-npm run build
-```
-
 ## Variables de entorno
 
 Copia `.env.example` como `.env.local` y configura únicamente los servicios que utilizarás.
