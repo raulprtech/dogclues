@@ -151,7 +151,7 @@ h1, h2, h3, h4 { font-family: "Fraunces", Georgia, serif; }
 .intent-menu button svg { width: 20px; }
 .intent-menu button strong { align-self: end; font-size: 14px; }
 .intent-menu button small { color: var(--ink-soft); font-size: 11px; }
-.city-search-wrap { position: absolute; left: 0; right: 0; bottom: -38px; min-height: 76px; }
+.city-search-wrap { position: relative; width: 100%; min-height: 76px; margin-top: 32px; }
 .city-search-wrap .discovery-bar { bottom: 0; }
 
 .category-strip { padding: 76px 0 26px; border-bottom: 1px solid var(--line); background: white; }
@@ -338,7 +338,7 @@ footer { font-family: "DM Sans", sans-serif; }
   .destination-menu { grid-template-columns: 1fr; }
   .destination-option em { display: none; }
   .intent-menu { grid-template-columns: 1fr; }
-  .city-search-wrap { left: 14px; right: 14px; }
+  .city-search-wrap { margin-top: 26px; }
   .category-strip { padding-top: 68px; }
   .section-block, .editorial-feature, .editorial-universe, .terry-section, .footprints-section { padding: 76px 0; }
   .section-heading { align-items: start; }

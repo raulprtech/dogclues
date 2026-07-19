@@ -45,7 +45,7 @@ export default async function CityPage({ params }: { params: RouteParams }) {
       <section className="relative min-h-[560px] overflow-visible bg-deep-blue text-white">
         {heroImage && <img src={heroImage} alt="" className="absolute inset-0 h-full w-full object-cover opacity-55" />}
         <div className="absolute inset-0 bg-gradient-to-t from-deep-blue via-deep-blue/55 to-deep-blue/20" />
-        <div className="site-shell relative z-10 flex min-h-[560px] flex-col justify-end pb-28 pt-20">
+        <div className="site-shell relative z-10 flex min-h-[560px] flex-col justify-end pb-12 pt-20">
           <span className="eyebrow eyebrow-light"><MapPin /> {city.regionName} · México</span>
           <h1 className="mt-5 max-w-4xl font-serif text-6xl font-semibold leading-none md:text-8xl">{city.name}</h1>
           <p className="mt-6 max-w-2xl text-xl leading-relaxed text-white/80">
