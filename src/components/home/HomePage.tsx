@@ -31,6 +31,10 @@ const categoryIcons = {
   'cocina-campechana': ChefHat,
 };
 
+const categoryLabels = {
+  'cocina-campechana': 'Cocina local',
+};
+
 const categoryNotes = {
   restaurantes: 'Mesas que sí valen la salida',
   experiencias: 'Planes para recordar',
@@ -120,7 +124,7 @@ export default function HomePage({ cities, categories, places, articles }: {
               >
                 <span className="category-icon"><Icon /></span>
                 <span>
-                  <strong>{category.name}</strong>
+                  <strong>{categoryLabels[category.slug as keyof typeof categoryLabels] || category.name}</strong>
                   <small>{categoryNotes[category.slug as keyof typeof categoryNotes]}</small>
                 </span>
                 <ChevronRight />
