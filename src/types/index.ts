@@ -1,5 +1,31 @@
 export type FootprintRating = 1 | 2 | 3;
 export type ContentSource = 'sanity' | 'demo';
+export type CoverageStatus = 'active' | 'planned' | 'archived';
+
+export interface Region {
+  id: string;
+  name: string;
+  slug: string;
+  country: string;
+  countryCode: string;
+  stateCode?: string;
+  contentSource?: ContentSource;
+}
+
+export interface City {
+  id: string;
+  name: string;
+  slug: string;
+  regionName: string;
+  regionSlug: string;
+  municipality?: string;
+  areaName?: string;
+  coverageStatus: CoverageStatus;
+  searchAliases?: string[];
+  description?: string;
+  priority?: number;
+  contentSource?: ContentSource;
+}
 
 export interface Category {
   id: string;
@@ -21,6 +47,9 @@ export interface Place {
   name: string;
   slug: string;
   categoryId: string;
+  cityId?: string;
+  citySlug?: string;
+  cityName?: string;
   zone: string;
   description: string;
   footprints?: FootprintRating;
@@ -59,6 +88,8 @@ export interface GuideEdition {
   publishedAt: string;
   coverImageUrl: string;
   coverImageAlt?: string;
+  cityId?: string;
+  citySlug?: string;
   sponsorId?: string;
   places: string[];
   contentSource?: ContentSource;
@@ -70,6 +101,9 @@ export interface Article {
   slug: string;
   subtitle?: string;
   categoryId: string;
+  cityId?: string;
+  citySlug?: string;
+  cityName?: string;
   author: string;
   publishedAt: string;
   readTimeMinutes: number;

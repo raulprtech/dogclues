@@ -1,12 +1,75 @@
-import type { Article, Category, GuideEdition, Place, Sponsor } from '../types';
+import type { Article, Category, City, GuideEdition, Place, Sponsor } from '../types';
 import { ARTICLES, CATEGORIES, GUIDE_EDITIONS, PLACES, SPONSORS } from './data';
 import { sanityClient } from './sanity';
 
+const FALLBACK_CITIES: City[] = [
+  {
+    id: 'campeche',
+    name: 'San Francisco de Campeche',
+    slug: 'campeche',
+    regionName: 'Campeche',
+    regionSlug: 'campeche',
+    municipality: 'Campeche',
+    coverageStatus: 'active',
+    searchAliases: ['Campeche', 'Ciudad de Campeche'],
+    description: 'La edición fundadora de DogClues.',
+    priority: 1,
+    contentSource: 'demo',
+  },
+  {
+    id: 'guadalajara',
+    name: 'Guadalajara',
+    slug: 'guadalajara',
+    regionName: 'Jalisco',
+    regionSlug: 'jalisco',
+    areaName: 'Área Metropolitana de Guadalajara',
+    coverageStatus: 'planned',
+    searchAliases: ['Jalisco', 'GDL', 'Zapopan', 'Tlaquepaque'],
+    priority: 2,
+    contentSource: 'demo',
+  },
+  {
+    id: 'merida',
+    name: 'Mérida',
+    slug: 'merida',
+    regionName: 'Yucatán',
+    regionSlug: 'yucatan',
+    coverageStatus: 'planned',
+    searchAliases: ['Merida', 'Yucatán'],
+    priority: 3,
+    contentSource: 'demo',
+  },
+  {
+    id: 'playa-del-carmen',
+    name: 'Playa del Carmen',
+    slug: 'playa-del-carmen',
+    regionName: 'Quintana Roo',
+    regionSlug: 'quintana-roo',
+    coverageStatus: 'planned',
+    searchAliases: ['Playa', 'Riviera Maya'],
+    priority: 4,
+    contentSource: 'demo',
+  },
+  {
+    id: 'chihuahua',
+    name: 'Chihuahua',
+    slug: 'chihuahua',
+    regionName: 'Chihuahua',
+    regionSlug: 'chihuahua',
+    municipality: 'Chihuahua',
+    coverageStatus: 'planned',
+    searchAliases: ['Chihuahua capital'],
+    priority: 5,
+    contentSource: 'demo',
+  },
+];
+
 const fallback = {
+  cities: FALLBACK_CITIES,
   categories: CATEGORIES.map((item) => ({ ...item, contentSource: 'demo' as const })),
-  places: PLACES.map((item) => ({ ...item, contentSource: 'demo' as const })),
-  articles: ARTICLES.map((item) => ({ ...item, contentSource: 'demo' as const })),
-  guides: GUIDE_EDITIONS.map((item) => ({ ...item, contentSource: 'demo' as const })),
+  places: PLACES.map((item) => ({ ...item, cityId: 'campeche', citySlug: 'campeche', cityName: 'San Francisco de Campeche', contentSource: 'demo' as const })),
+  articles: ARTICLES.map((item) => ({ ...item, cityId: 'campeche', citySlug: 'campeche', cityName: 'San Francisco de Campeche', contentSource: 'demo' as const })),
+  guides: GUIDE_EDITIONS.map((item) => ({ ...item, cityId: 'campeche', citySlug: 'campeche', contentSource: 'demo' as const })),
   sponsors: SPONSORS.map((item) => ({ ...item, contentSource: 'demo' as const })),
 };
 
@@ -20,10 +83,16 @@ async function fetchPublished<T>(query: string, params: Record<string, unknown> 
   }
 }
 
-const categoryFields = `_id, "id": _id, name, "slug": slug.current, description, "contentSource": "sanity"`;
-const placeFields = `_id, "id": _id, name, "slug": slug.current, "categoryId": category->_id, zone, description, footprints, averageScore, "imageUrl": image.asset->url, "imageAlt": image.alt, address, "location": {"lat": location.lat, "lng": location.lng}, phone, website, instagram, priceRange, "openingHours": string::split(openingHours, "\\n"), operatingStatus, lastVerifiedAt, "contentSource": "sanity"`;
-const articleFields = `_id, "id": _id, title, "slug": slug.current, subtitle, "categoryId": category->_id, "author": coalesce(author->displayName, "Equipo DogClues"), publishedAt, readTimeMinutes, "imageUrl": mainImage.asset->url, "imageAlt": mainImage.alt, content[]{..., _type == "image" => {"url": asset->url, alt, credit}}, "relatedPlaces": relatedPlaces[]->_id, courtesyDeclaration, featured, "contentSource": "sanity"`;
-const guideFields = `_id, "id": _id, title, "slug": slug.current, subtitle, description, publishedAt, "coverImageUrl": coverImage.asset->url, "coverImageAlt": coverImage.alt, "sponsorId": sponsor->_id, "places": places[]->_id, "contentSource": "sanity"`;
+const cityFields = `"id": _id, name, "slug": slug.current, "regionName": region->name, "regionSlug": region->slug.current, municipality, areaName, coverageStatus, searchAliases, description, priority, "contentSource": "sanity"`;
+const categoryFields = `"id": _id, name, "slug": slug.current, description, "contentSource": "sanity"`;
+const placeFields = `"id": _id, name, "slug": slug.current, "categoryId": category->_id, "cityId": city->_id, "citySlug": city->slug.current, "cityName": city->name, zone, description, footprints, averageScore, "imageUrl": image.asset->url, "imageAlt": image.alt, address, "location": {"lat": location.lat, "lng": location.lng}, phone, website, instagram, priceRange, "openingHours": string::split(openingHours, "\\n"), operatingStatus, lastVerifiedAt, "contentSource": "sanity"`;
+const articleFields = `"id": _id, title, "slug": slug.current, subtitle, "categoryId": category->_id, "cityId": city->_id, "citySlug": city->slug.current, "cityName": city->name, "author": coalesce(author->displayName, "Equipo DogClues"), publishedAt, readTimeMinutes, "imageUrl": mainImage.asset->url, "imageAlt": mainImage.alt, content[]{..., _type == "image" => {"url": asset->url, alt, credit}}, "relatedPlaces": relatedPlaces[]->_id, courtesyDeclaration, featured, "contentSource": "sanity"`;
+const guideFields = `"id": _id, title, "slug": slug.current, subtitle, description, publishedAt, "coverImageUrl": coverImage.asset->url, "coverImageAlt": coverImage.alt, "cityId": city->_id, "citySlug": city->slug.current, "sponsorId": sponsor->_id, "places": places[]->_id, "contentSource": "sanity"`;
+
+export async function getCities(): Promise<City[]> {
+  const items = await fetchPublished<City[]>(`*[_type == "city" && coverageStatus != "archived"] | order(priority asc, name asc) {${cityFields}}`);
+  return items?.length ? items : fallback.cities;
+}
 
 export async function getCategories(): Promise<Category[]> {
   const items = await fetchPublished<Category[]>(`*[_type == "category"] | order(name asc) {${categoryFields}}`);
@@ -66,6 +135,6 @@ export async function getSponsors(): Promise<Sponsor[]> {
 }
 
 export async function getHomeContent() {
-  const [categories, places, articles] = await Promise.all([getCategories(), getPlaces(), getArticles()]);
-  return { categories, places, articles };
+  const [cities, categories, places, articles] = await Promise.all([getCities(), getCategories(), getPlaces(), getArticles()]);
+  return { cities, categories, places, articles };
 }

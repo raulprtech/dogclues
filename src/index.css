@@ -123,6 +123,8 @@ h1, h2, h3, h4 { font-family: "Fraunces", Georgia, serif; }
 .discovery-field span { display: flex; flex-direction: column; min-width: 0; }
 .discovery-field small { color: var(--ink-soft); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
 .discovery-field strong { overflow: hidden; font-size: 14px; white-space: nowrap; text-overflow: ellipsis; }
+.discovery-field input { width: 100%; min-width: 0; padding: 1px 0 0; border: 0; outline: 0; background: transparent; color: var(--ink); font-size: 14px; font-weight: 700; text-overflow: ellipsis; }
+.discovery-field input::placeholder { color: var(--ink-soft); opacity: .82; }
 .discovery-button { min-width: 154px; padding: 0 24px; border-radius: 16px; background: var(--coral); color: white; display: flex; align-items: center; justify-content: center; gap: 9px; font-weight: 700; transition: 180ms ease; }
 .discovery-button:hover { background: var(--coral-dark); }
 .discovery-button svg { width: 19px; }
@@ -281,7 +283,7 @@ footer { font-family: "DM Sans", sans-serif; }
   .hero-copy h1 { font-size: clamp(50px, 14vw, 72px); }
   .hero-copy p { font-size: 17px; }
   .discovery-bar { bottom: -42px; grid-template-columns: 1fr auto; }
-  .discovery-field:nth-child(2) { display: none; }
+  .discovery-field:nth-of-type(2) { display: none; }
   .discovery-field { border-right: 0; }
   .discovery-button { min-width: 58px; width: 58px; padding: 0; }
   .discovery-button span { display: none; }

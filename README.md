@@ -8,8 +8,8 @@ DogClues es una revista digital de descubrimiento local para encontrar restauran
 
 El producto está preparado alrededor de tres sistemas con responsabilidades separadas:
 
-- **Sanity** es la fuente de verdad para artículos, lugares, guías, perfiles editoriales y reseñas.
-- **Supabase** recibe suscripciones, conserva evidencia de consentimiento y aloja controles operativos de calidad.
+- **Sanity** es la fuente de verdad para regiones, ciudades, artículos, lugares, guías, perfiles editoriales y reseñas.
+- **Supabase** recibe suscripciones y pistas de nuevos destinos, conserva evidencia de consentimiento y aloja controles operativos de calidad.
 - **Umami** mide lecturas, profundidad de lectura, vistas de lugares, aperturas de guías y filtros sin enviar correos ni otros datos personales.
 
 Cuando Sanity aún no tiene contenido publicado, el sitio conserva datos de muestra para evitar páginas vacías. Las fichas procedentes de ese respaldo se identifican como contenido de muestra.
@@ -18,6 +18,7 @@ Cuando Sanity aún no tiene contenido publicado, el sitio conserva datos de mues
 
 El Studio está integrado en `/studio`. Los documentos disponibles son:
 
+- Estados o regiones y ciudades con estado de cobertura.
 - Categorías.
 - Perfiles editoriales públicos, incluida la opción de identidad canina.
 - Lugares con fecha de verificación, fuente interna y datos estructurados.
@@ -33,6 +34,7 @@ Las migraciones se encuentran en `supabase/migrations`.
 
 - `001_initial_schema.sql` conserva el prototipo histórico.
 - `002_launch_foundation.sql` cierra el acceso público a suscripciones y añade consentimiento versionado, registro de fuentes, verificaciones de calidad y trazabilidad de importaciones.
+- `003_destination_requests.sql` guarda de forma privada la demanda por ciudad y las recomendaciones enviadas por lectores.
 
 Sanity mantiene el contenido editorial. Supabase no debe convertirse en una segunda copia manual de artículos o lugares.
 
@@ -63,6 +65,7 @@ La secuencia exacta de activación y comprobación está en [docs/launch-checkli
 | `/articulos` | Índice editorial. |
 | `/articulos/[slug]` | Artículos y rutas. |
 | `/metodologia` | Criterios y sistema de huellas. |
+| `/buscar` | Búsqueda por destino y recepción de pistas. |
 | `/privacidad` | Tratamiento simplificado de datos. |
 
 ## Principio editorial

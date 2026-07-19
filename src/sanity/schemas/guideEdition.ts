@@ -31,6 +31,13 @@ export default {
       validation: (Rule: any) => Rule.required(),
     },
     {
+      name: 'city',
+      title: 'Ciudad o destino',
+      type: 'reference',
+      to: [{ type: 'city' }],
+      validation: (Rule: any) => Rule.required(),
+    },
+    {
       name: 'publishedAt',
       title: 'Fecha de publicación',
       type: 'datetime',

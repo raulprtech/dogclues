@@ -9,6 +9,7 @@ export default defineType({
     defineField({ name: 'slug', title: 'Slug', type: 'slug', options: { source: 'title', maxLength: 96 }, validation: (rule) => rule.required() }),
     defineField({ name: 'subtitle', title: 'Bajada', type: 'text', rows: 2, validation: (rule) => rule.max(240) }),
     defineField({ name: 'category', title: 'Categoría', type: 'reference', to: [{ type: 'category' }], validation: (rule) => rule.required() }),
+    defineField({ name: 'city', title: 'Ciudad principal', type: 'reference', to: [{ type: 'city' }], validation: (rule) => rule.required() }),
     defineField({ name: 'author', title: 'Perfil editorial', type: 'reference', to: [{ type: 'criticProfile' }], validation: (rule) => rule.required() }),
     defineField({ name: 'publishedAt', title: 'Fecha de publicación', type: 'datetime', validation: (rule) => rule.required() }),
     defineField({ name: 'readTimeMinutes', title: 'Tiempo de lectura', type: 'number', validation: (rule) => rule.required().integer().min(1) }),

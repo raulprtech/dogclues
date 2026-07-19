@@ -23,7 +23,7 @@ export function Navbar() {
         <Link href="/" className="brand" aria-label="DogClues, inicio">
           <span className="brand-mark"><PawPrint aria-hidden="true" /></span>
           <span className="brand-word">DogClues</span>
-          <span className="brand-city">Campeche</span>
+          <span className="brand-city">México</span>
         </Link>
 
         <nav className="desktop-nav" aria-label="Navegación principal">
@@ -38,9 +38,9 @@ export function Navbar() {
         </nav>
 
         <div className="nav-actions">
-          <Link href="/guias/seleccion-fundadora" className="mini-search" aria-label="Buscar lugares en Campeche">
+          <Link href="/buscar" className="mini-search" aria-label="Buscar ciudades y lugares">
             <MapPin aria-hidden="true" />
-            <span>Campeche</span>
+            <span>Buscar ciudad</span>
             <span className="mini-search-icon"><Search aria-hidden="true" /></span>
           </Link>
           <button className="account-button" aria-label="Abrir cuenta">

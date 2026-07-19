@@ -8,6 +8,7 @@ export default defineType({
     defineField({ name: 'name', title: 'Nombre', type: 'string', validation: (rule) => rule.required() }),
     defineField({ name: 'slug', title: 'Slug', type: 'slug', options: { source: 'name', maxLength: 96 }, validation: (rule) => rule.required() }),
     defineField({ name: 'category', title: 'Categoría', type: 'reference', to: [{ type: 'category' }], validation: (rule) => rule.required() }),
+    defineField({ name: 'city', title: 'Ciudad o destino', type: 'reference', to: [{ type: 'city' }], validation: (rule) => rule.required() }),
     defineField({ name: 'zone', title: 'Zona', type: 'string', validation: (rule) => rule.required() }),
     defineField({ name: 'description', title: 'Descripción editorial', type: 'text', rows: 5, validation: (rule) => rule.required().max(700) }),
     defineField({ name: 'footprints', title: 'Huellas DogClues', type: 'number', description: 'Reconocimiento editorial de 1 a 3 huellas.', options: { list: [1, 2, 3] }, validation: (rule) => rule.min(1).max(3) }),

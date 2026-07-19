@@ -16,15 +16,15 @@ export default function PrivacyPage() {
         <div className="mt-10 space-y-8 text-lg leading-relaxed text-deep-blue/80">
           <section>
             <h2 className="font-serif text-2xl font-semibold text-deep-blue">Qué recopilamos</h2>
-            <p className="mt-3">Para el boletín solicitamos únicamente tu correo electrónico, la fecha y el origen del consentimiento. La analítica de navegación no recibe tu correo ni datos que permitan identificarte directamente.</p>
+            <p className="mt-3">Para el boletín solicitamos tu correo electrónico, la fecha y el origen del consentimiento. Si envías una pista, recopilamos la ciudad, el lugar y la explicación que decidas compartir; el correo es opcional y solo se guarda con autorización de contacto. La analítica no recibe estos textos ni tu correo.</p>
           </section>
           <section>
             <h2 className="font-serif text-2xl font-semibold text-deep-blue">Para qué lo usamos</h2>
-            <p className="mt-3">Usamos tu correo para administrar la suscripción y enviarte contenido editorial. Las métricas agregadas nos ayudan a entender qué guías y artículos resultan útiles.</p>
+            <p className="mt-3">Usamos tu correo para administrar la suscripción o dar seguimiento a una recomendación cuando lo autorizas. Las pistas se utilizan para priorizar destinos y realizar investigación editorial; nunca se publican automáticamente. Las métricas agregadas nos ayudan a entender qué guías y artículos resultan útiles.</p>
           </section>
           <section>
             <h2 className="font-serif text-2xl font-semibold text-deep-blue">Proveedores y conservación</h2>
-            <p className="mt-3">La suscripción se almacena en Supabase y podrá sincronizarse con Beehiiv para el envío del boletín. Conservamos el registro mientras la suscripción esté activa y el mínimo necesario para acreditar bajas o consentimiento.</p>
+            <p className="mt-3">Las suscripciones y recomendaciones se almacenan de forma privada en Supabase. El correo del boletín podrá sincronizarse con Beehiiv para realizar los envíos. Conservamos los registros mientras sean necesarios para la finalidad informada y el mínimo indispensable para acreditar bajas o consentimiento.</p>
           </section>
           <section>
             <h2 className="font-serif text-2xl font-semibold text-deep-blue">Tus decisiones</h2>

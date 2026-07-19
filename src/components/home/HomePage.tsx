@@ -2,12 +2,12 @@
 
 import { FormEvent, useState } from 'react';
 import Link from 'next/link';
-import type { Article, Category, Place } from '../../types';
+import type { Article, Category, City, Place } from '../../types';
+import DiscoverySearch from '../search/DiscoverySearch';
 import { trackNewsletterSubmit } from '../../lib/umami';
 import {
   ArrowRight,
   Award,
-  Binoculars,
   ChefHat,
   ChevronRight,
   Coffee,
@@ -16,7 +16,6 @@ import {
   Landmark,
   MapPin,
   PawPrint,
-  Search,
   Sparkles,
   Utensils,
   Waves,
@@ -57,7 +56,8 @@ function Footprints({ count }: { count: number }) {
   );
 }
 
-export default function HomePage({ categories, places, articles }: {
+export default function HomePage({ cities, categories, places, articles }: {
+  cities: City[];
   categories: Category[];
   places: Place[];
   articles: Article[];
@@ -103,7 +103,7 @@ export default function HomePage({ categories, places, articles }: {
         </div>
         <div className="site-shell hero-content">
           <div className="hero-copy">
-            <span className="eyebrow eyebrow-light"><Compass /> Guía local independiente · Campeche</span>
+            <span className="eyebrow eyebrow-light"><Compass /> Revista local independiente · México</span>
             <h1>Buenas pistas.<br /><em>Mejores lugares.</em></h1>
             <p>
               Nuestro schnauzer rastrea la ciudad para encontrar esas mesas, rincones y
@@ -111,20 +111,7 @@ export default function HomePage({ categories, places, articles }: {
             </p>
           </div>
 
-          <div className="discovery-bar" role="search" aria-label="Buscar recomendaciones">
-            <div className="discovery-field">
-              <MapPin />
-              <span><small>Destino</small><strong>San Francisco de Campeche</strong></span>
-            </div>
-            <div className="discovery-field">
-              <Binoculars />
-              <span><small>¿Qué se te antoja?</small><strong>Comer, pasear, descubrir</strong></span>
-            </div>
-            <Link href="/guias/seleccion-fundadora" className="discovery-button" aria-label="Explorar guía">
-              <Search />
-              <span>Explorar</span>
-            </Link>
-          </div>
+          <DiscoverySearch cities={cities} />
         </div>
       </section>
 
