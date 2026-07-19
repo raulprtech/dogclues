@@ -127,7 +127,7 @@ export default async function CityPage({ params }: { params: RouteParams }) {
       <section className="bg-terracotta py-16 text-white">
         <div className="site-shell flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
           <div><span className="text-xs font-bold uppercase tracking-widest text-white/70">Consideración editorial</span><h2 className="mt-3 font-serif text-4xl">¿Falta tu negocio en {city.name}?</h2><p className="mt-3 max-w-2xl text-white/80">Puedes postularlo gratuitamente. La solicitud no garantiza inclusión y cualquier visita se realiza sin fecha anunciada.</p></div>
-          <Link href={'/postula-tu-negocio?ciudad=' + encodeURIComponent(city.name)} className="button bg-white text-deep-blue">Enviar negocio <ArrowRight /></Link>
+          <Link href={'/postula-tu-negocio?ciudad=' + encodeURIComponent(city.name)} className="button city-business-button">Enviar negocio <ArrowRight /></Link>
         </div>
       </section>
     </main>

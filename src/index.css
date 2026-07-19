@@ -228,6 +228,9 @@ h1, h2, h3, h4 { font-family: "Fraunces", Georgia, serif; }
 .button svg { width: 18px; }
 .button-coral { background: var(--coral); color: white; }
 .button-coral:hover { background: var(--coral-dark); }
+.city-business-button { background: white; color: var(--ink); box-shadow: 0 8px 24px rgba(10,33,51,.16); }
+.city-business-button:hover { background: var(--paper); color: var(--ink); transform: translateY(-2px); }
+.city-business-button:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
 
 .stories-section { background: white; }
 .story-grid { display: grid; grid-template-columns: 1.35fr 0.65fr; gap: 26px 34px; }
