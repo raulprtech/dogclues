@@ -2,7 +2,7 @@
 
 ![DogClues — Buenas pistas. Mejores lugares.](public/og.png)
 
-DogClues es una revista digital de descubrimiento local para encontrar restaurantes, experiencias, lugares turísticos y comercios que realmente vale la pena conocer. La primera edición se concentra en Campeche.
+DogClues es una revista digital de descubrimiento local para encontrar restaurantes, experiencias, lugares turísticos y comercios que realmente vale la pena conocer. Campeche conserva la edición fundadora y la cobertura ya está abierta en Jalisco, Mérida y Chihuahua.
 
 ## Prioridad de lanzamiento
 
@@ -16,7 +16,7 @@ Cuando Sanity aún no tiene contenido publicado, el sitio conserva datos de mues
 
 ## Flujo editorial
 
-El Studio está integrado en `/studio`. Los documentos disponibles son:
+El Studio está integrado en `/studio` y separa claramente las fichas de negocios y lugares, los artículos del blog, las ediciones de la revista, la evaluación editorial, los territorios y los otros contenidos. Los documentos disponibles son:
 
 - Estados o regiones y ciudades con estado de cobertura.
 - Categorías.

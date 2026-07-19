@@ -67,7 +67,7 @@ export default function HomePage({ cities, categories, places, articles }: {
   const [subscribed, setSubscribed] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError] = useState('');
-  const featuredPlaces = places.slice(0, 4);
+  const featuredPlaces = places.filter((place) => place.citySlug === 'campeche' || place.cityId === 'campeche').slice(0, 4);
 
   const handleSubscribe = async (event: FormEvent) => {
     event.preventDefault();
@@ -225,7 +225,7 @@ export default function HomePage({ cities, categories, places, articles }: {
                     {categories.find((category) => category.id === article.categoryId)?.name} · {article.readTimeMinutes} min
                   </span>
                   <Link href={'/articulos/' + article.slug}><h3>{article.title}</h3></Link>
-                  <p>{index === 0 ? 'Una ruta breve, honesta y muy campechana para empezar el día con el pie derecho.' : 'La pista precisa para descubrir algo que vale la vuelta.'}</p>
+                  <p>{index === 0 ? 'Una ruta breve y honesta para descubrir ' + (article.cityName || 'un destino') + ' con el pie derecho.' : 'La pista precisa para descubrir algo que vale la vuelta.'}</p>
                 </div>
               </article>
             ))}
@@ -286,7 +286,7 @@ export default function HomePage({ cities, categories, places, articles }: {
             {[
               { count: 1, title: 'Buena pista', copy: 'Un lugar honesto que vale la visita.' },
               { count: 2, title: 'Gran hallazgo', copy: 'Calidad consistente y carácter propio.' },
-              { count: 3, title: 'Deja huella', copy: 'Una experiencia que explica Campeche.' },
+              { count: 3, title: 'Deja huella', copy: 'Una experiencia que ayuda a entender su destino.' },
             ].map((level) => (
               <div className="footprint-level" key={level.count}>
                 <Footprints count={level.count} />
@@ -307,7 +307,7 @@ export default function HomePage({ cities, categories, places, articles }: {
         <div className="site-shell newsletter-card">
           <div>
             <span className="eyebrow"><Compass /> La pista del fin de semana</span>
-            <h2>Campeche, directo a tu correo.</h2>
+            <h2>Nuevas pistas de México, directo a tu correo.</h2>
             <p>Una recomendación bien elegida. Sin listas infinitas. Sin spam.</p>
           </div>
           {subscribed ? (

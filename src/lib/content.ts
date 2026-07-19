@@ -23,7 +23,8 @@ const FALLBACK_CITIES: City[] = [
     regionName: 'Jalisco',
     regionSlug: 'jalisco',
     areaName: 'Área Metropolitana de Guadalajara',
-    coverageStatus: 'planned',
+    coverageStatus: 'active',
+    description: 'Nuevas historias de Jalisco, desde Guadalajara y su zona metropolitana.',
     searchAliases: ['Jalisco', 'GDL', 'Zapopan', 'Tlaquepaque'],
     priority: 2,
     contentSource: 'demo',
@@ -34,7 +35,8 @@ const FALLBACK_CITIES: City[] = [
     slug: 'merida',
     regionName: 'Yucatán',
     regionSlug: 'yucatan',
-    coverageStatus: 'planned',
+    coverageStatus: 'active',
+    description: 'Mesas, barrios y experiencias para descubrir Mérida con criterio local.',
     searchAliases: ['Merida', 'Yucatán'],
     priority: 3,
     contentSource: 'demo',
@@ -47,7 +49,7 @@ const FALLBACK_CITIES: City[] = [
     regionSlug: 'quintana-roo',
     coverageStatus: 'planned',
     searchAliases: ['Playa', 'Riviera Maya'],
-    priority: 4,
+    priority: 5,
     contentSource: 'demo',
   },
   {
@@ -57,9 +59,10 @@ const FALLBACK_CITIES: City[] = [
     regionName: 'Chihuahua',
     regionSlug: 'chihuahua',
     municipality: 'Chihuahua',
-    coverageStatus: 'planned',
+    coverageStatus: 'active',
+    description: 'Primeras pistas gastronómicas y culturales desde la capital de Chihuahua.',
     searchAliases: ['Chihuahua capital'],
-    priority: 5,
+    priority: 4,
     contentSource: 'demo',
   },
 ];
@@ -90,8 +93,17 @@ const articleFields = `"id": _id, title, "slug": slug.current, subtitle, "catego
 const guideFields = `"id": _id, title, "slug": slug.current, subtitle, description, publishedAt, "coverImageUrl": coverImage.asset->url, "coverImageAlt": coverImage.alt, "cityId": city->_id, "citySlug": city->slug.current, "sponsorId": sponsor->_id, "places": places[]->_id, "contentSource": "sanity"`;
 
 export async function getCities(): Promise<City[]> {
-  const items = await fetchPublished<City[]>(`*[_type == "city" && coverageStatus != "archived"] | order(priority asc, name asc) {${cityFields}}`);
-  return items?.length ? items : fallback.cities;
+  const items = await fetchPublished<City[]>("*[_type == \"city\"] {" + cityFields + "}");
+  if (!items?.length) return fallback.cities;
+
+  const cities = new Map(fallback.cities.map((city) => [city.regionSlug + "/" + city.slug, city]));
+  for (const city of items) {
+    cities.set(city.regionSlug + "/" + city.slug, city);
+  }
+
+  return [...cities.values()]
+    .filter((city) => city.coverageStatus !== "archived")
+    .sort((a, b) => (a.priority ?? 999) - (b.priority ?? 999) || a.name.localeCompare(b.name, "es"));
 }
 
 export async function getCategories(): Promise<Category[]> {

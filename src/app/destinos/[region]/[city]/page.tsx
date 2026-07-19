@@ -82,6 +82,14 @@ export default async function CityPage({ params }: { params: RouteParams }) {
               <div><span className="eyebrow"><PawPrint /> Selección local</span><h2>Lugares que dejan huella</h2><p>Visitas y verificaciones editoriales en {city.name}.</p></div>
               {guides[0] && <Link href={'/guias/' + guides[0].slug} className="text-link">Abrir la guía <ArrowRight /></Link>}
             </div>
+            {places.length === 0 && (
+              <div className="mb-10 rounded-[32px] border border-deep-blue/10 bg-white px-7 py-12 text-center shadow-sm md:px-14">
+                <span className="eyebrow"><Compass /> Cobertura activa</span>
+                <h3 className="mt-4 font-serif text-4xl text-deep-blue">La selección de lugares de {city.name} está en preparación.</h3>
+                <p className="mx-auto mt-4 max-w-2xl text-lg text-deep-blue/70">Ya podemos publicar artículos y fichas verificadas de este destino, sin rellenarlo con recomendaciones de muestra.</p>
+                <Link href={"/postula-tu-negocio?ciudad=" + encodeURIComponent(city.name)} className="button button-coral mt-7">Compartir una pista <ArrowRight /></Link>
+              </div>
+            )}
             <div className="place-grid">
               {places.slice(0, 8).map((place) => (
                 <article className="place-card" key={place.id}>

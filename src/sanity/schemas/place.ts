@@ -2,7 +2,7 @@ import { defineField, defineType } from 'sanity';
 
 export default defineType({
   name: 'place',
-  title: 'Lugar',
+  title: "Ficha de negocio o lugar",
   type: 'document',
   fields: [
     defineField({ name: 'name', title: 'Nombre', type: 'string', validation: (rule) => rule.required() }),

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { MapPin, Menu, PawPrint, Search, UserRound, X } from 'lucide-react';
+import { MapPin, Menu, PawPrint, Search, X } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
 const navigation = [
@@ -43,10 +43,6 @@ export function Navbar() {
             <span>Buscar ciudad</span>
             <span className="mini-search-icon"><Search aria-hidden="true" /></span>
           </Link>
-          <button className="account-button" aria-label="Abrir cuenta">
-            <Menu aria-hidden="true" />
-            <span><UserRound aria-hidden="true" /></span>
-          </button>
           <button
             className="mobile-menu-button"
             onClick={() => setIsOpen((value) => !value)}

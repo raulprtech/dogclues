@@ -10,9 +10,9 @@ export const metadata: Metadata = {
     default: 'DogClues | Buenas pistas, mejores lugares',
     template: '%s | DogClues',
   },
-  description: 'La guía editorial para comer, pasear y descubrir los lugares de Campeche que realmente vale la pena conocer.',
+  description: 'La revista editorial para comer, pasear y descubrir lugares que realmente vale la pena conocer en México.',
   applicationName: 'DogClues',
-  keywords: ['Campeche', 'restaurantes', 'guía local', 'experiencias', 'turismo', 'DogClues'],
+  keywords: ["México", "Campeche", "Jalisco", "Mérida", "Chihuahua", "restaurantes", "guía local", "experiencias", "DogClues"],
   openGraph: {
     type: 'website',
     locale: 'es_MX',

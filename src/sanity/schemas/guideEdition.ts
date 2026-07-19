@@ -1,6 +1,6 @@
 export default {
   name: 'guideEdition',
-  title: 'Edición de Guía',
+  title: "Edición de la revista",
   type: 'document',
   fields: [
     {

@@ -98,10 +98,6 @@ h1, h2, h3, h4 { font-family: "Fraunces", Georgia, serif; }
 .mini-search > svg { width: 16px; color: var(--coral); }
 .mini-search-icon { width: 36px; height: 36px; border-radius: 50%; background: var(--coral); color: white; display: grid; place-items: center; }
 .mini-search-icon svg { width: 16px; }
-.account-button { height: 46px; padding: 4px 5px 4px 12px; border: 1px solid var(--line); border-radius: 999px; background: white; display: flex; align-items: center; gap: 8px; color: var(--ink); }
-.account-button > svg { width: 17px; }
-.account-button span { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--ink); color: white; }
-.account-button span svg { width: 17px; }
 .mobile-menu-button, .mobile-nav { display: none; }
 
 .hero-section { position: relative; min-height: 680px; overflow: visible; background: var(--ink); color: white; }
@@ -323,7 +319,7 @@ footer { font-family: "DM Sans", sans-serif; }
 @media (max-width: 800px) {
   .site-shell { width: min(100% - 28px, 1240px); }
   .nav-shell { min-height: 70px; }
-  .brand-city, .mini-search, .account-button { display: none; }
+  .brand-city, .mini-search { display: none; }
   .mobile-menu-button { width: 42px; height: 42px; padding: 0; border: 1px solid var(--line); border-radius: 50%; background: white; display: grid; place-items: center; color: var(--ink); }
   .mobile-menu-button svg { width: 20px; }
   .mobile-nav { position: absolute; top: 70px; left: 0; right: 0; padding: 12px 20px 22px; border-bottom: 1px solid var(--line); background: var(--paper); display: grid; box-shadow: var(--shadow-sm); }
