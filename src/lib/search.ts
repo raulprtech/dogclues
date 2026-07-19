@@ -17,3 +17,7 @@ export function findCityBySearch(cities: City[], value: string) {
     return candidates.some((candidate) => candidate && normalizeSearchText(candidate) === normalized);
   });
 }
+
+export function cityPath(city: City) {
+  return '/destinos/' + city.regionSlug + '/' + city.slug;
+}

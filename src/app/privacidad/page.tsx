@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Aviso de privacidad',
-  description: 'Cómo DogClues trata la información de lectores y suscriptores.',
+  description: 'Cómo DogClues trata información de lectores, suscriptores y negocios.',
 };
 
 export default function PrivacyPage() {
@@ -16,15 +16,23 @@ export default function PrivacyPage() {
         <div className="mt-10 space-y-8 text-lg leading-relaxed text-deep-blue/80">
           <section>
             <h2 className="font-serif text-2xl font-semibold text-deep-blue">Qué recopilamos</h2>
-            <p className="mt-3">Para el boletín solicitamos tu correo electrónico, la fecha y el origen del consentimiento. Si envías una pista, recopilamos la ciudad, el lugar y la explicación que decidas compartir; el correo es opcional y solo se guarda con autorización de contacto. La analítica no recibe estos textos ni tu correo.</p>
+            <p className="mt-3">Para el boletín solicitamos tu correo y evidencia del consentimiento. Si envías una pista, recopilamos la ciudad, el lugar y la explicación que decidas compartir; el correo es opcional. Las búsquedas de ciudades sin cobertura se cuentan diariamente de forma agregada, sin correo, nombre ni identificador de usuario.</p>
+          </section>
+          <section>
+            <h2 className="font-serif text-2xl font-semibold text-deep-blue">Postulaciones de negocios</h2>
+            <p className="mt-3">Una postulación puede incluir datos del establecimiento, dirección, horarios, enlaces, trayectoria, persona de contacto, correo y teléfono. Se usan para validar la solicitud, planear investigación editorial y comunicarnos con la persona autorizada. La información privada, los estados internos y las ventanas de visita no se publican.</p>
           </section>
           <section>
             <h2 className="font-serif text-2xl font-semibold text-deep-blue">Para qué lo usamos</h2>
-            <p className="mt-3">Usamos tu correo para administrar la suscripción o dar seguimiento a una recomendación cuando lo autorizas. Las pistas se utilizan para priorizar destinos y realizar investigación editorial; nunca se publican automáticamente. Las métricas agregadas nos ayudan a entender qué guías y artículos resultan útiles.</p>
+            <p className="mt-3">Usamos las señales agregadas para priorizar destinos; las recomendaciones para investigación editorial; y los datos de contacto para administrar suscripciones o solicitudes autorizadas. Ninguna pista o postulación se publica automáticamente ni garantiza una visita, inclusión o reconocimiento.</p>
           </section>
           <section>
             <h2 className="font-serif text-2xl font-semibold text-deep-blue">Proveedores y conservación</h2>
-            <p className="mt-3">Las suscripciones y recomendaciones se almacenan de forma privada en Supabase. El correo del boletín podrá sincronizarse con Beehiiv para realizar los envíos. Conservamos los registros mientras sean necesarios para la finalidad informada y el mínimo indispensable para acreditar bajas o consentimiento.</p>
+            <p className="mt-3">Las suscripciones, recomendaciones, métricas de demanda y postulaciones se almacenan de forma privada en Supabase. El correo del boletín podrá sincronizarse con Beehiiv. Conservamos los registros mientras sean necesarios para la finalidad informada y el mínimo indispensable para acreditar consentimiento, bajas o decisiones editoriales.</p>
+          </section>
+          <section>
+            <h2 className="font-serif text-2xl font-semibold text-deep-blue">Analítica</h2>
+            <p className="mt-3">Umami recibe eventos y datos agregados de navegación. No le enviamos correos, teléfonos, nombres, postulaciones, explicaciones ni búsquedas escritas libremente.</p>
           </section>
           <section>
             <h2 className="font-serif text-2xl font-semibold text-deep-blue">Tus decisiones</h2>

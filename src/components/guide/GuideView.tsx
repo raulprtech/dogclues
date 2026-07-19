@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Filter, MapPin, PawPrint } from 'lucide-react';
+import { ArrowRight, Filter, MapPin, PawPrint } from 'lucide-react';
 import Link from 'next/link';
 import ContentViewTracker from '../analytics/ContentViewTracker';
 import { trackCategoryFilter } from '../../lib/umami';
@@ -84,6 +84,11 @@ export default function GuideView({ guide, places, categories, sponsor }: {
             );
           })}
         </div>
+
+        <aside className="mt-16 rounded-3xl bg-deep-blue p-8 text-ivory md:flex md:items-center md:justify-between md:gap-10">
+          <div><span className="text-xs font-bold uppercase tracking-widest text-ivory/60">Próxima selección</span><h2 className="mt-3 font-serif text-3xl">¿Crees que falta tu negocio?</h2><p className="mt-3 max-w-2xl text-sm leading-relaxed text-ivory/70">Envíalo para consideración editorial. La postulación es gratuita y no garantiza visita, posición ni reconocimiento.</p></div>
+          <Link href={'/postula-tu-negocio?ciudad=' + encodeURIComponent(places[0]?.cityName || '')} className="button mt-6 shrink-0 bg-white text-deep-blue md:mt-0">Enviar negocio <ArrowRight /></Link>
+        </aside>
       </div>
     </main>
   );

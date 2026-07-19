@@ -19,10 +19,10 @@ export function Footer() {
               <span className="font-serif font-bold text-2xl tracking-tight text-ivory">DogClues</span>
             </Link>
             <p className="text-sm text-ivory/70 leading-relaxed mb-6">
-              Una red de descubrimiento local guiada por el buen olfato y el criterio editorial. Empezamos en Campeche.
+              Una revista de descubrimiento local guiada por el buen olfato y el criterio editorial. Empezamos en Campeche y seguimos nuevas pistas por México.
             </p>
             <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-ivory/60">
-              <MapPin className="w-4 h-4 text-terracotta" /> Campeche, México
+              <MapPin className="w-4 h-4 text-terracotta" /> México
             </div>
           </div>
 
@@ -38,7 +38,8 @@ export function Footer() {
           <div>
             <h3 className="font-serif font-semibold text-lg text-ivory mb-4">DogClues</h3>
             <ul className="space-y-3 text-sm">
-              <li><Link href="/guias/seleccion-fundadora" className="hover:text-terracotta">Guía Campeche</Link></li>
+              <li><Link href="/buscar" className="hover:text-terracotta">Destinos</Link></li>
+              <li><Link href="/postula-tu-negocio" className="hover:text-terracotta">Postula tu negocio</Link></li>
               <li><Link href="/metodologia" className="hover:text-terracotta">Metodología</Link></li>
               <li><Link href="/patrocinios" className="hover:text-terracotta">Patrocinios</Link></li>
               <li><Link href="/privacidad" className="hover:text-terracotta">Privacidad</Link></li>

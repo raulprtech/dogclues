@@ -8,9 +8,9 @@ import { cn } from '../../lib/utils';
 
 const navigation = [
   { name: 'Descubrir', href: '/' },
-  { name: 'Guía Campeche', href: '/guias/seleccion-fundadora' },
+  { name: 'Destinos', href: '/buscar' },
   { name: 'Las huellas', href: '/metodologia' },
-  { name: 'Para negocios', href: '/patrocinios' },
+  { name: 'Para negocios', href: '/postula-tu-negocio' },
 ];
 
 export function Navbar() {

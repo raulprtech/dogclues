@@ -11,18 +11,20 @@
 
 ## 2. Supabase
 
-- Ejecutar `001_initial_schema.sql`, `002_launch_foundation.sql` y `003_destination_requests.sql` en ese orden en el SQL Editor.
+- Ejecutar `001_initial_schema.sql`, `002_launch_foundation.sql`, `003_destination_requests.sql` y `004_demand_and_business_applications.sql` en ese orden en el SQL Editor.
 - Configurar `NEXT_PUBLIC_SUPABASE_URL` y `SUPABASE_SECRET_KEY` en Netlify.
 - Enviar una suscripción de prueba desde portada.
 - Verificar en `newsletter_subscribers` el correo normalizado, `consent_at`, `privacy_version`, `source` y `status`.
+- Buscar una ciudad sin cobertura y verificar el incremento diario en `destination_demand_daily`.
 - Enviar una pista desde una ciudad sin cobertura y verificar `destination_requests`.
+- Enviar una postulación de prueba y verificar `business_applications`, consentimiento y estado inicial.
 - Confirmar que los roles `anon` y `authenticated` no pueden leer las tablas privadas.
 - Revisar el aviso de privacidad con asesoría jurídica antes de una campaña pública.
 
 ## 3. Umami
 
 - Crear el sitio en Umami y configurar ID y URL del script.
-- Confirmar pageviews y los eventos `article_view`, `article_read_75`, `place_view`, `guide_view`, `category_filter`, `search_submit`, `destination_request`, `recommendation_submit` y `newsletter_submit`.
+- Confirmar pageviews y los eventos `article_view`, `article_read_75`, `place_view`, `guide_view`, `category_filter`, `search_submit`, `destination_request`, `recommendation_submit`, `business_application_submit` y `newsletter_submit`.
 - Revisar que ningún evento contenga correo, nombre, teléfono o texto libre.
 
 ## 4. Control editorial
@@ -30,11 +32,12 @@
 - Sustituir todas las piezas de muestra antes de anunciar la revista.
 - Validar enlaces, horarios, teléfonos y coordenadas contra una fuente registrada.
 - Mantener la declaración de cortesía cuando haya invitación, descuento o relación comercial.
-- Hacer una revisión móvil y de escritorio de portada, búsqueda, formulario de pistas, guía, artículo, lugar, Studio y privacidad.
+- Hacer una revisión móvil y de escritorio de portada, menú de búsqueda, páginas de ciudad, formulario de pistas, postulación de negocio, guía, artículo, lugar, Studio y privacidad.
 - Ejecutar `npm run lint` y `npm run build` antes de publicar.
 
 ## 5. Después del lanzamiento
 
 - Conectar Beehiiv mediante un proceso de sincronización con reintentos y registro de errores; Supabase conserva la evidencia primaria de consentimiento.
 - Definir alertas para fichas cuya `lastVerifiedAt` haya vencido.
-- No habilitar permisos de negocios ni votaciones hasta diseñar autenticación, auditoría y moderación específicas.
+- Preparar una vista interna de postulaciones antes de delegar su seguimiento.
+- No habilitar autoservicio, permisos de negocios ni votaciones hasta diseñar autenticación, auditoría y moderación específicas.

@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, Clock, MapPin, PawPrint, Search } from 'lucide-react';
+import DestinationDemandTracker from '../../components/analytics/DestinationDemandTracker';
 import RecommendationForm from '../../components/search/RecommendationForm';
 import { getArticles, getCategories, getCities, getPlaces } from '../../lib/content';
-import { findCityBySearch, normalizeSearchText } from '../../lib/search';
+import { cityPath, findCityBySearch, normalizeSearchText } from '../../lib/search';
 
 export const revalidate = 60;
 
@@ -57,6 +58,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Searc
 
   return (
     <main className="min-h-screen bg-ivory py-16 lg:py-24">
+      {destination && !activeCity && <DestinationDemandTracker destination={destination} citySlug={city?.slug} coverageStatus={city?.coverageStatus === 'planned' ? 'planned' : 'unknown'} />}
       <div className="site-shell">
         <header className="mx-auto max-w-4xl text-center">
           <span className="eyebrow"><Search /> Explora DogClues</span>
@@ -75,7 +77,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Searc
         {!hasSearch && (
           <section className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-3" aria-label="Destinos">
             {cities.map((item) => (
-              <Link key={item.id} href={'/buscar?destino=' + encodeURIComponent(item.name)} className="group rounded-3xl border border-deep-blue/10 bg-white p-6 transition hover:-translate-y-1 hover:shadow-md">
+              <Link key={item.id} href={item.coverageStatus === 'active' ? cityPath(item) : '/buscar?destino=' + encodeURIComponent(item.name)} className="group rounded-3xl border border-deep-blue/10 bg-white p-6 transition hover:-translate-y-1 hover:shadow-md">
                 <div className="flex items-start justify-between gap-4">
                   <MapPin className="h-6 w-6 text-terracotta" />
                   <span className={'rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wider ' + (item.coverageStatus === 'active' ? 'bg-soft-green/15 text-deep-blue' : 'bg-terracotta/10 text-terracotta')}>

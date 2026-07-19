@@ -4,6 +4,7 @@ import { FormEvent, useState } from 'react';
 import Link from 'next/link';
 import type { Article, Category, City, Place } from '../../types';
 import DiscoverySearch from '../search/DiscoverySearch';
+import DestinationShowcase from './DestinationShowcase';
 import { trackNewsletterSubmit } from '../../lib/umami';
 import {
   ArrowRight,
@@ -106,8 +107,8 @@ export default function HomePage({ cities, categories, places, articles }: {
             <span className="eyebrow eyebrow-light"><Compass /> Revista local independiente · México</span>
             <h1>Buenas pistas.<br /><em>Mejores lugares.</em></h1>
             <p>
-              Nuestro schnauzer rastrea la ciudad para encontrar esas mesas, rincones y
-              experiencias que dan ganas de recomendar en voz baja.
+              Rastreamos ciudades para encontrar esas mesas, rincones y experiencias con
+              identidad que dan ganas de recomendar en voz baja.
             </p>
           </div>
 
@@ -122,7 +123,7 @@ export default function HomePage({ cities, categories, places, articles }: {
             return (
               <Link
                 key={category.id}
-                href={'/guias/seleccion-fundadora?categoria=' + category.slug}
+                href={'/buscar?q=' + category.slug}
                 className="category-pill"
               >
                 <span className="category-icon"><Icon /></span>
@@ -137,12 +138,14 @@ export default function HomePage({ cities, categories, places, articles }: {
         </div>
       </section>
 
+      <DestinationShowcase cities={cities} places={places} />
+
       <section className="section-block">
         <div className="site-shell">
           <div className="section-heading">
             <div>
-              <span className="eyebrow"><PawPrint /> Selección DogClues</span>
-              <h2>Lugares con buena pista</h2>
+              <span className="eyebrow"><PawPrint /> Edición fundadora · Campeche</span>
+              <h2>El punto de partida</h2>
               <p>Una primera selección probada con curiosidad, criterio y apetito.</p>
             </div>
             <Link href="/guias/seleccion-fundadora" className="text-link">Ver toda la guía <ArrowRight /></Link>
@@ -207,8 +210,8 @@ export default function HomePage({ cities, categories, places, articles }: {
         <div className="site-shell">
           <div className="section-heading">
             <div>
-              <span className="eyebrow"><Waves /> Historias para saborear la ciudad</span>
-              <h2>El cuaderno de Campeche</h2>
+              <span className="eyebrow"><Waves /> Historias desde cada destino</span>
+              <h2>El cuaderno de DogClues</h2>
             </div>
           </div>
           <div className="story-grid">
