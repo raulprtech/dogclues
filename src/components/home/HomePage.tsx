@@ -2,6 +2,8 @@
 
 import { FormEvent, useState } from 'react';
 import Link from 'next/link';
+import type { Article, Category, Place } from '../../types';
+import { trackNewsletterSubmit } from '../../lib/umami';
 import {
   ArrowRight,
   Award,
@@ -19,7 +21,6 @@ import {
   Utensils,
   Waves,
 } from 'lucide-react';
-import { ARTICLES, CATEGORIES, PLACES } from '../../lib/data';
 
 const categoryIcons = {
   restaurantes: Utensils,
@@ -56,16 +57,37 @@ function Footprints({ count }: { count: number }) {
   );
 }
 
-export default function HomePage() {
+export default function HomePage({ categories, places, articles }: {
+  categories: Category[];
+  places: Place[];
+  articles: Article[];
+}) {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
-  const featuredPlaces = PLACES.slice(0, 4);
+  const [submitting, setSubmitting] = useState(false);
+  const [formError, setFormError] = useState('');
+  const featuredPlaces = places.slice(0, 4);
 
-  const handleSubscribe = (event: FormEvent) => {
+  const handleSubscribe = async (event: FormEvent) => {
     event.preventDefault();
-    if (!email) return;
-    setSubscribed(true);
-    setEmail('');
+    if (!email || submitting) return;
+    setSubmitting(true);
+    setFormError('');
+    try {
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ email, source: 'homepage', company: '' }),
+      });
+      if (!response.ok) throw new Error('subscription_failed');
+      setSubscribed(true);
+      setEmail('');
+      trackNewsletterSubmit();
+    } catch {
+      setFormError('No pudimos guardar tu correo. Inténtalo de nuevo en un momento.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -108,7 +130,7 @@ export default function HomePage() {
 
       <section className="category-strip" aria-label="Explorar por categoría">
         <div className="site-shell category-row">
-          {CATEGORIES.map((category) => {
+          {categories.map((category) => {
             const Icon = categoryIcons[category.slug as keyof typeof categoryIcons] || Compass;
             return (
               <Link
@@ -153,7 +175,7 @@ export default function HomePage() {
                 </div>
                 <div className="place-card-body">
                   <div className="place-meta">
-                    <span>{CATEGORIES.find((category) => category.id === place.categoryId)?.name}</span>
+                    <span>{categories.find((category) => category.id === place.categoryId)?.name}</span>
                     <Footprints count={place.footprints || 0} />
                   </div>
                   <Link href={'/lugares/' + place.slug}><h3>{place.name}</h3></Link>
@@ -203,14 +225,14 @@ export default function HomePage() {
             </div>
           </div>
           <div className="story-grid">
-            {ARTICLES.slice(0, 3).map((article, index) => (
+            {articles.slice(0, 3).map((article, index) => (
               <article className={index === 0 ? 'story-card story-card-large' : 'story-card'} key={article.id}>
                 <Link href={'/articulos/' + article.slug} className="story-image">
                   <img src={article.imageUrl} alt={article.title} />
                 </Link>
                 <div>
                   <span className="story-kicker">
-                    {CATEGORIES.find((category) => category.id === article.categoryId)?.name} · {article.readTimeMinutes} min
+                    {categories.find((category) => category.id === article.categoryId)?.name} · {article.readTimeMinutes} min
                   </span>
                   <Link href={'/articulos/' + article.slug}><h3>{article.title}</h3></Link>
                   <p>{index === 0 ? 'Una ruta breve, honesta y muy campechana para empezar el día con el pie derecho.' : 'La pista precisa para descubrir algo que vale la vuelta.'}</p>
@@ -311,7 +333,10 @@ export default function HomePage() {
                 onChange={(event) => setEmail(event.target.value)}
                 required
               />
-              <button type="submit">Quiero la pista <ArrowRight /></button>
+              <button type="submit" disabled={submitting}>{submitting ? 'Guardando…' : 'Quiero la pista'} <ArrowRight /></button>
+              <input className="sr-only" name="company" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+              <small>Al suscribirte aceptas nuestro <Link href="/privacidad">aviso de privacidad</Link>.</small>
+              {formError && <p role="alert">{formError}</p>}
             </form>
           )}
         </div>

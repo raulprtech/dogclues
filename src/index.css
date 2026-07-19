@@ -248,6 +248,10 @@ h1, h2, h3, h4 { font-family: "Fraunces", Georgia, serif; }
 .newsletter-form input { min-width: 0; flex: 1; padding: 0 14px; border: 0; outline: 0; background: transparent; color: var(--ink); }
 .newsletter-form button { padding: 0 18px; border: 0; border-radius: 12px; background: var(--ink); color: white; display: flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 700; }
 .newsletter-form button svg { width: 16px; }
+.newsletter-form { flex-wrap: wrap; }
+.newsletter-form > small, .newsletter-form > p { flex-basis: 100%; margin: 7px 10px 2px; font-size: 11px; line-height: 1.35; }
+.newsletter-form > small a { color: var(--coral-dark); text-decoration: underline; }
+.newsletter-form > p { color: #a63d35; }
 .success-message { padding: 18px; border-radius: 16px; background: #e6efe5; display: flex; align-items: center; gap: 10px; font-weight: 700; }
 .success-message svg { width: 20px; color: var(--coral); }
 

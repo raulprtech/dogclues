@@ -40,6 +40,7 @@ export default {
       name: 'coverImage',
       title: 'Imagen de Portada',
       type: 'image',
+      validation: (Rule: any) => Rule.required(),
       options: {
         hotspot: true,
       },
@@ -53,6 +54,7 @@ export default {
     {
       name: 'places',
       title: 'Lugares',
+      validation: (Rule: any) => Rule.required().min(1),
       type: 'array',
       of: [{ type: 'reference', to: [{ type: 'place' }] }],
     },

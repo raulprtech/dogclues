@@ -19,5 +19,11 @@ export default {
       },
       validation: (Rule: any) => Rule.required(),
     },
+    {
+      name: 'description',
+      title: 'Descripción',
+      type: 'text',
+      rows: 3,
+    },
   ],
 };

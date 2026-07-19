@@ -1,14 +1,18 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, Clock } from 'lucide-react';
-import { ARTICLES, CATEGORIES } from '../../lib/data';
+import { getArticles, getCategories } from '../../lib/content';
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: 'Historias y pistas de Campeche',
   description: 'Rutas, sabores, aperturas y hallazgos editoriales de DogClues Campeche.',
 };
 
-export default function ArticlesPage() {
+export default async function ArticlesPage() {
+  const [articles, categories] = await Promise.all([getArticles(), getCategories()]);
+
   return (
     <main className="bg-ivory py-20 lg:py-28">
       <div className="site-shell">
@@ -22,13 +26,13 @@ export default function ArticlesPage() {
           </p>
         </header>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {ARTICLES.map((article) => (
+          {articles.map((article) => (
             <article key={article.id} className="group">
               <Link href={'/articulos/' + article.slug} className="block overflow-hidden rounded-[22px] aspect-[4/3] mb-5">
-                <img src={article.imageUrl} alt={article.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <img src={article.imageUrl} alt={article.imageAlt || article.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
               </Link>
               <div className="flex items-center justify-between gap-4 text-[11px] uppercase tracking-widest text-terracotta font-bold mb-3">
-                <span>{CATEGORIES.find((category) => category.id === article.categoryId)?.name}</span>
+                <span>{categories.find((category) => category.id === article.categoryId)?.name}</span>
                 <span className="inline-flex items-center gap-1 text-deep-blue/50"><Clock className="w-3 h-3" /> {article.readTimeMinutes} min</span>
               </div>
               <h2 className="font-serif text-2xl font-semibold leading-tight mb-3">

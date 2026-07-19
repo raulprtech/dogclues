@@ -4,6 +4,8 @@ import guideEdition from './guideEdition';
 import article from './article';
 import sponsor from './sponsor';
 import award from './award';
+import criticProfile from './criticProfile';
+import review from './review';
 
 export const schemaTypes = [
   category,
@@ -12,4 +14,6 @@ export const schemaTypes = [
   article,
   sponsor,
   award,
+  criticProfile,
+  review,
 ];

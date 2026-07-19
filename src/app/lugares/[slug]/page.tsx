@@ -2,15 +2,19 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowLeft, MapPin, PawPrint } from 'lucide-react';
-import { CATEGORIES, PLACES } from '../../../lib/data';
+import ContentViewTracker from '../../../components/analytics/ContentViewTracker';
+import { getCategories, getPlace, getPlaces } from '../../../lib/content';
 
-export function generateStaticParams() {
-  return PLACES.map((place) => ({ slug: place.slug }));
+export const revalidate = 60;
+
+export async function generateStaticParams() {
+  const places = await getPlaces();
+  return places.map((place) => ({ slug: place.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const place = PLACES.find((item) => item.slug === slug);
+  const place = await getPlace(slug);
   if (!place) return {};
   return {
     title: place.name,
@@ -21,14 +25,18 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function PlacePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const place = PLACES.find((item) => item.slug === slug);
+  const [place, categories] = await Promise.all([getPlace(slug), getCategories()]);
   if (!place) notFound();
-  const category = CATEGORIES.find((item) => item.id === place.categoryId);
+  const category = categories.find((item) => item.id === place.categoryId);
+  const mapQuery = place.location
+    ? place.location.lat + ',' + place.location.lng
+    : place.name + ' Campeche';
 
   return (
     <main className="bg-ivory pb-20">
+      <ContentViewTracker type="place" slug={place.slug} />
       <div className="w-full h-[52vh] min-h-[420px] relative">
-        <img src={place.imageUrl} alt={place.name} className="w-full h-full object-cover" />
+        <img src={place.imageUrl} alt={place.imageAlt || place.name} className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-deep-blue/20" />
       </div>
       <div className="max-w-4xl mx-auto px-4 -mt-24 relative z-10">
@@ -54,19 +62,13 @@ export default async function PlacePage({ params }: { params: Promise<{ slug: st
               <p className="text-lg leading-relaxed text-deep-blue/80 mb-8">{place.description}</p>
               <div className="bg-soft-green/10 border border-soft-green/20 p-6 rounded-[18px]">
                 <strong className="text-deep-blue">Antes de ir</strong>
-                <p className="text-sm text-deep-blue/70 mt-2">Los horarios y precios pueden variar. Confirma directamente con el establecimiento.</p>
+                <p className="text-sm text-deep-blue/70 mt-2">Última verificación: {place.lastVerifiedAt ? new Intl.DateTimeFormat('es-MX').format(new Date(place.lastVerifiedAt)) : 'consulta directamente con el establecimiento'}.</p>
               </div>
             </div>
             <div>
               <h2 className="font-serif text-2xl font-bold text-deep-blue mb-4">Ubicación</h2>
               <div className="w-full aspect-square bg-gray-100 rounded-[18px] overflow-hidden border border-deep-blue/10">
-                <iframe
-                  title={'Mapa de ' + place.name}
-                  width="100%"
-                  height="100%"
-                  src={'https://maps.google.com/maps?q=' + encodeURIComponent(place.name + ' Campeche') + '&t=&z=15&ie=UTF8&iwloc=&output=embed'}
-                  loading="lazy"
-                />
+                <iframe title={'Mapa de ' + place.name} width="100%" height="100%" src={'https://maps.google.com/maps?q=' + encodeURIComponent(mapQuery) + '&t=&z=15&ie=UTF8&iwloc=&output=embed'} loading="lazy" />
               </div>
             </div>
           </div>

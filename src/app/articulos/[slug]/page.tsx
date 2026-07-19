@@ -2,15 +2,20 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowLeft, Calendar, Clock } from 'lucide-react';
-import { ARTICLES, CATEGORIES } from '../../../lib/data';
+import ContentViewTracker from '../../../components/analytics/ContentViewTracker';
+import EditorialBody from '../../../components/editorial/EditorialBody';
+import { getArticle, getArticles, getCategories } from '../../../lib/content';
 
-export function generateStaticParams() {
-  return ARTICLES.map((article) => ({ slug: article.slug }));
+export const revalidate = 60;
+
+export async function generateStaticParams() {
+  const articles = await getArticles();
+  return articles.map((article) => ({ slug: article.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const article = ARTICLES.find((item) => item.slug === slug);
+  const article = await getArticle(slug);
   if (!article) return {};
   return {
     title: article.title,
@@ -21,14 +26,15 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const article = ARTICLES.find((item) => item.slug === slug);
+  const [article, categories] = await Promise.all([getArticle(slug), getCategories()]);
   if (!article) notFound();
 
-  const category = CATEGORIES.find((item) => item.id === article.categoryId);
+  const category = categories.find((item) => item.id === article.categoryId);
   const formattedDate = new Intl.DateTimeFormat('es-MX', { year: 'numeric', month: 'long', day: 'numeric' }).format(new Date(article.publishedAt));
 
   return (
     <main>
+      <ContentViewTracker type="article" slug={article.slug} />
       <article className="bg-ivory py-20 lg:py-28">
         <div className="max-w-3xl mx-auto px-5">
           <Link href="/articulos" className="inline-flex items-center gap-1 text-sm text-deep-blue/60 hover:text-terracotta mb-10">
@@ -42,8 +48,13 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4" /> {formattedDate}</span>
             <span className="flex items-center gap-1.5"><Clock className="w-4 h-4" /> {article.readTimeMinutes} min</span>
           </div>
-          <img src={article.imageUrl} alt={article.title} className="w-full aspect-[16/9] object-cover rounded-[24px] mb-12" />
-          <div className="prose prose-lg max-w-none text-deep-blue/80" dangerouslySetInnerHTML={{ __html: article.content }} />
+          <img src={article.imageUrl} alt={article.imageAlt || article.title} className="w-full aspect-[16/9] object-cover rounded-[24px] mb-12" />
+          <EditorialBody value={article.content} />
+          {article.courtesyDeclaration && (
+            <aside className="mt-10 rounded-2xl border border-deep-blue/10 bg-white p-5 text-sm text-deep-blue/70">
+              <strong className="text-deep-blue">Transparencia editorial:</strong> {article.courtesyDeclaration}
+            </aside>
+          )}
         </div>
       </article>
     </main>

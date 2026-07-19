@@ -41,6 +41,7 @@ export function Footer() {
               <li><Link href="/guias/seleccion-fundadora" className="hover:text-terracotta">Guía Campeche</Link></li>
               <li><Link href="/metodologia" className="hover:text-terracotta">Metodología</Link></li>
               <li><Link href="/patrocinios" className="hover:text-terracotta">Patrocinios</Link></li>
+              <li><Link href="/privacidad" className="hover:text-terracotta">Privacidad</Link></li>
               <li><a href="mailto:contacto@dogclues.com" className="hover:text-terracotta">Contacto</a></li>
             </ul>
           </div>

@@ -1,10 +1,12 @@
 export type FootprintRating = 1 | 2 | 3;
+export type ContentSource = 'sanity' | 'demo';
 
 export interface Category {
   id: string;
   name: string;
   slug: string;
   description?: string;
+  contentSource?: ContentSource;
 }
 
 export interface Award {
@@ -22,10 +24,21 @@ export interface Place {
   zone: string;
   description: string;
   footprints?: FootprintRating;
-  awards?: string[]; // IDs of awards
+  averageScore?: number;
+  awards?: string[];
   imageUrl: string;
+  imageAlt?: string;
   address?: string;
+  location?: { lat: number; lng: number };
+  phone?: string;
+  website?: string;
+  instagram?: string;
+  priceRange?: string;
+  openingHours?: string[];
+  operatingStatus?: string;
+  lastVerifiedAt?: string;
   isSponsored?: boolean;
+  contentSource?: ContentSource;
 }
 
 export interface Sponsor {
@@ -34,6 +47,7 @@ export interface Sponsor {
   logoUrl?: string;
   description?: string;
   type: 'main' | 'category' | 'launch';
+  contentSource?: ContentSource;
 }
 
 export interface GuideEdition {
@@ -44,8 +58,10 @@ export interface GuideEdition {
   description: string;
   publishedAt: string;
   coverImageUrl: string;
+  coverImageAlt?: string;
   sponsorId?: string;
-  places: string[]; // IDs of places included
+  places: string[];
+  contentSource?: ContentSource;
 }
 
 export interface Article {
@@ -58,9 +74,12 @@ export interface Article {
   publishedAt: string;
   readTimeMinutes: number;
   imageUrl: string;
-  content: string; // Markdown or HTML
-  relatedPlaces?: string[]; // IDs of places mentioned
+  imageAlt?: string;
+  content: string | unknown[];
+  relatedPlaces?: string[];
   courtesyDeclaration?: string;
+  featured?: boolean;
+  contentSource?: ContentSource;
 }
 
 export interface NewsletterSubscriber {

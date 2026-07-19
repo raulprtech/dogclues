@@ -1,6 +1,13 @@
-// In a real Next.js/SSR environment, this would use @supabase/ssr
-// For this Vite prototype, we provide a placeholder to demonstrate architecture.
+import 'server-only';
+import { createClient } from '@supabase/supabase-js';
 
-export const createServerClient = () => {
-  throw new Error("Server client is not implemented in this client-side prototype. Please refer to Supabase SSR documentation for Next.js.");
-};
+export function createSupabaseAdminClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const secret = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!url || !secret) return null;
+
+  return createClient(url, secret, {
+    auth: { autoRefreshToken: false, persistSession: false },
+  });
+}

@@ -2,129 +2,69 @@
 
 ![DogClues — Buenas pistas. Mejores lugares.](public/og.png)
 
-**DogClues** es una plataforma editorial de descubrimiento local que ayuda a encontrar restaurantes, experiencias, sitios turísticos, comercios y actividades que realmente vale la pena conocer.
+DogClues es una revista digital de descubrimiento local para encontrar restaurantes, experiencias, lugares turísticos y comercios que realmente vale la pena conocer. La primera edición se concentra en Campeche.
 
-La identidad incorpora un schnauzer sal y pimienta con buen olfato para descubrir lugares especiales, seguir pistas dentro de una ciudad y reconocer negocios con calidad, identidad o relevancia local.
+## Prioridad de lanzamiento
 
-La primera ciudad es **Campeche**. La visión es crecer desde una publicación local hasta una red nacional de guías, fichas verificadas, servicios comunitarios e inteligencia comercial.
+El producto está preparado alrededor de tres sistemas con responsabilidades separadas:
 
-## Qué hace diferente a DogClues
+- **Sanity** es la fuente de verdad para artículos, lugares, guías, perfiles editoriales y reseñas.
+- **Supabase** recibe suscripciones, conserva evidencia de consentimiento y aloja controles operativos de calidad.
+- **Umami** mide lecturas, profundidad de lectura, vistas de lugares, aperturas de guías y filtros sin enviar correos ni otros datos personales.
 
-DogClues no pretende ser un directorio exhaustivo ni una plataforma de reseñas masivas. Combina:
+Cuando Sanity aún no tiene contenido publicado, el sitio conserva datos de muestra para evitar páginas vacías. Las fichas procedentes de ese respaldo se identifican como contenido de muestra.
 
-- Curaduría y criterio editorial independiente.
-- Guías locales, rutas y artículos con contexto.
-- Reconocimientos propios representados por huellas.
-- Participación futura de suscriptores verificados.
-- Separación estricta entre recomendaciones y publicidad.
-- Una identidad cercana y reconocible protagonizada por un schnauzer rastreador.
+## Flujo editorial
 
-## Producto actual
+El Studio está integrado en `/studio`. Los documentos disponibles son:
 
-La primera versión incluye:
+- Categorías.
+- Perfiles editoriales públicos, incluida la opción de identidad canina.
+- Lugares con fecha de verificación, fuente interna y datos estructurados.
+- Artículos con Portable Text y declaraciones de cortesía.
+- Reseñas con cinco dimensiones de evaluación y huellas.
+- Ediciones de guía y patrocinadores.
 
-- Portada editorial y explorador de Campeche.
-- Selección fundadora de lugares.
-- Fichas individuales para restaurantes, experiencias y sitios turísticos.
-- Artículos y rutas editoriales.
-- Filtros por categorías.
-- Metadatos por página, Open Graph, sitemap y robots.
-- Diseño responsivo inspirado en publicaciones de viajes y plataformas modernas de descubrimiento.
+La identidad real y privada de un crítico no debe almacenarse en el documento público de Sanity.
 
-## Universo editorial
+## Base de datos y calidad
 
-| Sección | Enfoque |
-| --- | --- |
-| **El Perro Glotón** | Restaurantes, cafeterías, mercados, bares y gastronomía. |
-| **Perro Milpero** | Cocina tradicional, ingredientes, productores y patrimonio. |
-| **Pata de Perro** | Turismo, rutas, escapadas, naturaleza y experiencias. |
-| **Buen Olfato** | Aperturas, proyectos emergentes y descubrimientos tempranos. |
-| **Perro de Barrio** | Guías por colonias, zonas, barrios y municipios. |
-| **Huella Local** | Comercios, artesanos, marcas y proyectos independientes. |
+Las migraciones se encuentran en `supabase/migrations`.
 
-## Sistema de huellas
+- `001_initial_schema.sql` conserva el prototipo histórico.
+- `002_launch_foundation.sql` cierra el acceso público a suscripciones y añade consentimiento versionado, registro de fuentes, verificaciones de calidad y trazabilidad de importaciones.
 
-Las huellas son reconocimientos editoriales, no calificaciones comprables.
+Sanity mantiene el contenido editorial. Supabase no debe convertirse en una segunda copia manual de artículos o lugares.
 
-- **Una huella — Recomendado:** una experiencia sólida que vale la pena conocer.
-- **Dos huellas — Destacado:** consistencia, identidad clara o una propuesta superior.
-- **Tres huellas — Referente:** un lugar capaz de representar lo mejor de la ciudad y justificar una visita.
+## Configuración de producción
 
-Los patrocinadores no seleccionan establecimientos, no asignan huellas y no modifican reconocimientos.
+Configura en Netlify las variables descritas en `.env.example`. Las imprescindibles para el lanzamiento son:
 
-## Arquitectura
+- `NEXT_PUBLIC_SANITY_PROJECT_ID`
+- `NEXT_PUBLIC_SANITY_DATASET`
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `SUPABASE_SECRET_KEY`
+- `PRIVACY_NOTICE_VERSION`
+- `NEXT_PUBLIC_UMAMI_WEBSITE_ID`
+- `NEXT_PUBLIC_UMAMI_SCRIPT_URL`
 
-- **Frontend público:** Next.js 15 App Router.
-- **Interfaz:** React 19 + Tailwind CSS 4.
-- **Contenido editorial:** Sanity.
-- **Comunidad y operaciones futuras:** Supabase.
-- **Analítica:** Umami.
-- **Despliegue previsto:** Netlify o cualquier plataforma compatible con Next.js.
+`SANITY_API_READ_TOKEN` solo es necesario si el dataset no permite lectura pública. La clave secreta de Supabase se usa exclusivamente en el servidor y nunca debe llevar el prefijo `NEXT_PUBLIC_`.
 
-Next.js genera HTML indexable y metadatos propios para cada guía, artículo y lugar. El prototipo utiliza datos locales de respaldo en `src/lib/data.ts`; el cliente de Sanity está preparado en `src/lib/sanity.ts`.
-
-### Responsabilidades
-
-- **Sanity** administra lo que DogClues publica.
-- **Supabase** administrará lo que lectores y negocios hacen.
-- **Umami** mide el uso del sitio respetando la privacidad.
+La secuencia exacta de activación y comprobación está en [docs/launch-checklist.md](docs/launch-checklist.md).
 
 ## Rutas principales
 
 | Ruta | Contenido |
 | --- | --- |
-| `/` | Portada y descubrimiento. |
-| `/guias/seleccion-fundadora` | Primera guía de Campeche. |
-| `/lugares/[slug]` | Fichas de lugares. |
+| `/` | Portada editorial y suscripción. |
+| `/studio` | Administración de Sanity. |
+| `/guias/[slug]` | Ediciones publicadas. |
+| `/lugares/[slug]` | Fichas verificadas. |
 | `/articulos` | Índice editorial. |
 | `/articulos/[slug]` | Artículos y rutas. |
 | `/metodologia` | Criterios y sistema de huellas. |
-| `/patrocinios` | Formatos comerciales y política de independencia. |
+| `/privacidad` | Tratamiento simplificado de datos. |
 
-## Variables de entorno
+## Principio editorial
 
-Copia `.env.example` como `.env.local` y configura únicamente los servicios que utilizarás.
-
-```bash
-cp .env.example .env.local
-```
-
-Variables disponibles:
-
-- `NEXT_PUBLIC_SANITY_PROJECT_ID`
-- `NEXT_PUBLIC_SANITY_DATASET`
-- `SANITY_API_READ_TOKEN`
-- `NEXT_PUBLIC_SUPABASE_URL`
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-- `NEXT_PUBLIC_UMAMI_WEBSITE_ID`
-- `NEXT_PUBLIC_UMAMI_SCRIPT_URL`
-
-El sitio funciona con contenido de demostración cuando estas variables no están configuradas.
-
-## Estructura relevante
-
-```text
-public/
-  og.png
-  schnauzer-campeche.png
-src/
-  app/                  Rutas y metadatos de Next.js
-  components/           Componentes editoriales y navegación
-  lib/data.ts           Contenido local de demostración
-  lib/sanity.ts         Cliente de Sanity
-  sanity/               Esquemas del CMS
-  types/                Tipos del dominio
-```
-
-## Evolución prevista
-
-1. Publicación editorial y selección fundadora de Campeche.
-2. Newsletter, guías patrocinadas y votaciones verificadas.
-3. Fichas gratuitas y reclamables para negocios.
-4. Promociones, eventos, contactos y estadísticas.
-5. Huella Alerta y servicios comunitarios para perros.
-6. DogClues Insights y expansión a nuevas ciudades.
-
----
-
-**Principio editorial:** las huellas no se venden. Los espacios comerciales siempre deben estar identificados y separados de las recomendaciones.
+Las huellas no se venden. Los espacios comerciales siempre se identifican y se mantienen separados de las recomendaciones.
