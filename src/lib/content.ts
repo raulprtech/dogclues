@@ -1,6 +1,16 @@
 import type { Article, Category, City, GuideEdition, Place, Sponsor } from '../types';
 import { ARTICLES, CATEGORIES, GUIDE_EDITIONS, PLACES, SPONSORS } from './data';
 import { sanityClient } from './sanity';
+import type { EditorialSectionSlug } from './editorial-sections';
+
+const fallbackArticleSections: Record<string, EditorialSectionSlug> = {
+  'art-1': 'perro-gloton',
+  'art-2': 'buen-olfato',
+  'art-3': 'perro-gloton',
+  'art-4': 'pata-de-perro',
+  'art-5': 'perro-milpero',
+  'art-6': 'perro-de-barrio',
+};
 
 const FALLBACK_CITIES: City[] = [
   {
@@ -71,7 +81,7 @@ const fallback = {
   cities: FALLBACK_CITIES,
   categories: CATEGORIES.map((item) => ({ ...item, contentSource: 'demo' as const })),
   places: PLACES.map((item) => ({ ...item, cityId: 'campeche', citySlug: 'campeche', cityName: 'San Francisco de Campeche', contentSource: 'demo' as const })),
-  articles: ARTICLES.map((item) => ({ ...item, cityId: 'campeche', citySlug: 'campeche', cityName: 'San Francisco de Campeche', contentSource: 'demo' as const })),
+  articles: ARTICLES.map((item) => ({ ...item, editorialSection: fallbackArticleSections[item.id], cityId: 'campeche', citySlug: 'campeche', cityName: 'San Francisco de Campeche', contentSource: 'demo' as const })),
   guides: GUIDE_EDITIONS.map((item) => ({ ...item, cityId: 'campeche', citySlug: 'campeche', contentSource: 'demo' as const })),
   sponsors: SPONSORS.map((item) => ({ ...item, contentSource: 'demo' as const })),
 };
@@ -89,7 +99,7 @@ async function fetchPublished<T>(query: string, params: Record<string, unknown> 
 const cityFields = `"id": _id, name, "slug": slug.current, "regionName": region->name, "regionSlug": region->slug.current, municipality, areaName, coverageStatus, searchAliases, description, priority, "contentSource": "sanity"`;
 const categoryFields = `"id": _id, name, "slug": slug.current, description, "contentSource": "sanity"`;
 const placeFields = `"id": _id, name, "slug": slug.current, "categoryId": category->_id, "cityId": city->_id, "citySlug": city->slug.current, "cityName": city->name, zone, description, footprints, averageScore, "imageUrl": image.asset->url, "imageAlt": image.alt, address, "location": {"lat": location.lat, "lng": location.lng}, phone, website, instagram, priceRange, "openingHours": string::split(openingHours, "\\n"), operatingStatus, lastVerifiedAt, "contentSource": "sanity"`;
-const articleFields = `"id": _id, title, "slug": slug.current, subtitle, "categoryId": category->_id, "cityId": city->_id, "citySlug": city->slug.current, "cityName": city->name, "author": coalesce(author->displayName, "Equipo DogClues"), publishedAt, readTimeMinutes, "imageUrl": mainImage.asset->url, "imageAlt": mainImage.alt, content[]{..., _type == "image" => {"url": asset->url, alt, credit}}, "relatedPlaces": relatedPlaces[]->_id, courtesyDeclaration, featured, "contentSource": "sanity"`;
+const articleFields = `"id": _id, title, "slug": slug.current, subtitle, editorialSection, "categoryId": category->_id, "cityId": city->_id, "citySlug": city->slug.current, "cityName": city->name, "author": coalesce(author->displayName, "Equipo DogClues"), publishedAt, readTimeMinutes, "imageUrl": mainImage.asset->url, "imageAlt": mainImage.alt, content[]{..., _type == "image" => {"url": asset->url, alt, credit}}, "relatedPlaces": relatedPlaces[]->_id, courtesyDeclaration, featured, "contentSource": "sanity"`;
 const guideFields = `"id": _id, title, "slug": slug.current, subtitle, description, publishedAt, "coverImageUrl": coverImage.asset->url, "coverImageAlt": coverImage.alt, "cityId": city->_id, "citySlug": city->slug.current, "sponsorId": sponsor->_id, "places": places[]->_id, "contentSource": "sanity"`;
 
 export async function getCities(): Promise<City[]> {

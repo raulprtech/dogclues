@@ -9,7 +9,7 @@ import { cn } from '../../lib/utils';
 const navigation = [
   { name: 'Descubrir', href: '/' },
   { name: 'Destinos', href: '/buscar' },
-  { name: 'Las huellas', href: '/metodologia' },
+  { name: 'Acerca', href: '/acerca' },
   { name: 'Para negocios', href: '/postula-tu-negocio' },
 ];
 

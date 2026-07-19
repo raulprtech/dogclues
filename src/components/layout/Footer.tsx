@@ -1,12 +1,7 @@
 import Link from 'next/link';
 import { Instagram, Mail, MapPin, PawPrint } from 'lucide-react';
 
-const editorial = [
-  ['El Perro Glotón', '/articulos?seccion=perro-gloton'],
-  ['Perro Milpero', '/articulos?seccion=perro-milpero'],
-  ['Pata de Perro', '/articulos?seccion=pata-de-perro'],
-  ['Buen Olfato', '/articulos?seccion=buen-olfato'],
-];
+import { editorialSections } from '../../lib/editorial-sections';
 
 export function Footer() {
   return (
@@ -29,8 +24,8 @@ export function Footer() {
           <div>
             <h3 className="font-serif font-semibold text-lg text-ivory mb-4">Las pistas</h3>
             <ul className="space-y-3 text-sm">
-              {editorial.map(([name, href]) => (
-                <li key={name}><Link href={href} className="hover:text-terracotta transition-colors">{name}</Link></li>
+              {editorialSections.map((section) => (
+                <li key={section.slug}><Link href={'/secciones/' + section.slug} className="hover:text-terracotta transition-colors">{section.name}</Link></li>
               ))}
             </ul>
           </div>
@@ -38,6 +33,7 @@ export function Footer() {
           <div>
             <h3 className="font-serif font-semibold text-lg text-ivory mb-4">DogClues</h3>
             <ul className="space-y-3 text-sm">
+              <li><Link href="/acerca" className="hover:text-terracotta">Acerca</Link></li>
               <li><Link href="/buscar" className="hover:text-terracotta">Destinos</Link></li>
               <li><Link href="/postula-tu-negocio" className="hover:text-terracotta">Postula tu negocio</Link></li>
               <li><Link href="/metodologia" className="hover:text-terracotta">Metodología</Link></li>

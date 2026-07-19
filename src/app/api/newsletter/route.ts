@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { syncBeehiivSubscriber } from '../../../lib/beehiiv';
 import { createSupabaseAdminClient } from '../../../lib/supabase/server';
 
 export const runtime = 'nodejs';
@@ -51,5 +52,27 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'No se pudo guardar la suscripción.' }, { status: 500 });
   }
 
-  return NextResponse.json({ ok: true }, { status: 201 });
+  let beehiivStatus: 'disabled' | 'synced' | 'pending' = 'disabled';
+
+  try {
+    const beehiiv = await syncBeehiivSubscriber(email, source);
+    if (beehiiv.configured && beehiiv.ok) {
+      beehiivStatus = 'synced';
+      if (beehiiv.subscriptionId) {
+        const { error: updateError } = await supabase
+          .from('newsletter_subscribers')
+          .update({ beehiiv_subscription_id: beehiiv.subscriptionId, updated_at: new Date().toISOString() })
+          .eq('email', email);
+        if (updateError) console.error('Beehiiv subscription ID persistence failed', updateError.code);
+      }
+    } else if (beehiiv.configured) {
+      beehiivStatus = 'pending';
+      console.error('Beehiiv subscription sync deferred', beehiiv.status);
+    }
+  } catch (error) {
+    beehiivStatus = 'pending';
+    console.error('Beehiiv subscription sync deferred', error instanceof Error ? error.name : 'unknown');
+  }
+
+  return NextResponse.json({ ok: true, newsletterSync: beehiivStatus }, { status: 201 });
 }

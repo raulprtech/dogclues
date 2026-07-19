@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start --hostname 0.0.0.0 --port 3000",
     "clean": "rm -rf .next",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "newsletter:sync": "node scripts/sync-beehiiv.mjs"
   },
   "dependencies": {
     "@portabletext/react": "^6.2.0",

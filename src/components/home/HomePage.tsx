@@ -5,6 +5,7 @@ import Link from 'next/link';
 import type { Article, Category, City, Place } from '../../types';
 import DiscoverySearch from '../search/DiscoverySearch';
 import DestinationShowcase from './DestinationShowcase';
+import { editorialSections } from '../../lib/editorial-sections';
 import { trackNewsletterSubmit } from '../../lib/umami';
 import {
   ArrowRight,
@@ -37,15 +38,6 @@ const categoryNotes = {
   cafeterias: 'Café, pan y sobremesa',
   'cocina-campechana': 'Sabores con raíz',
 };
-
-const editorialSections = [
-  { name: 'El Perro Glotón', slug: 'perro-gloton', note: 'Restaurantes, cafés, mercados y antojos.', tone: 'coral' },
-  { name: 'Perro Milpero', slug: 'perro-milpero', note: 'Cocina tradicional, productores y patrimonio.', tone: 'maiz' },
-  { name: 'Pata de Perro', slug: 'pata-de-perro', note: 'Rutas, escapadas y experiencias locales.', tone: 'sea' },
-  { name: 'Buen Olfato', slug: 'buen-olfato', note: 'Aperturas y proyectos antes de que todos hablen de ellos.', tone: 'sage' },
-  { name: 'Perro de Barrio', slug: 'perro-de-barrio', note: 'Guías por colonias, zonas y municipios.', tone: 'blue' },
-  { name: 'Huella Local', slug: 'huella-local', note: 'Comercios, artesanos y marcas independientes.', tone: 'rose' },
-];
 
 function Footprints({ count }: { count: number }) {
   return (
@@ -245,60 +237,12 @@ export default function HomePage({ cities, categories, places, articles }: {
           </div>
           <div className="editorial-section-grid">
             {editorialSections.map((section, index) => (
-              <Link href={'/articulos?seccion=' + section.slug} className={'editorial-section-card tone-' + section.tone} key={section.slug}>
+              <Link href={'/secciones/' + section.slug} className={'editorial-section-card tone-' + section.tone} key={section.slug}>
                 <span className="section-number">0{index + 1}</span>
                 <div><h3>{section.name}</h3><p>{section.note}</p></div>
                 <ArrowRight />
               </Link>
             ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="terry-section">
-        <div className="site-shell terry-grid">
-          <div className="terry-portrait">
-            <img src="/schnauzer-campeche.png" alt="Schnauzer sal y pimienta, rastreador oficial de DogClues" />
-            <span className="terry-caption"><PawPrint /> Rastreador oficial</span>
-          </div>
-          <div className="terry-copy">
-            <span className="eyebrow"><PawPrint /> Conoce a tu guía</span>
-            <h2>Nuestro guía tiene nariz para <em>las buenas historias.</em></h2>
-            <p>
-              Es schnauzer, campechano por adopción y enemigo de las recomendaciones tibias.
-              Su misión es encontrar lugares con identidad: esos que cocinan, reciben y cuentan
-              algo verdadero sobre su comunidad.
-            </p>
-            <blockquote>“Si mueve la cola, merece una pista. Si deja huella, merece la guía.”</blockquote>
-            <Link href="/metodologia" className="text-link">Cómo elegimos cada lugar <ArrowRight /></Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="footprints-section">
-        <div className="site-shell">
-          <div className="footprints-heading">
-            <span className="eyebrow eyebrow-light"><Award /> Un reconocimiento que no se compra</span>
-            <h2>Las huellas DogClues</h2>
-            <p>Una escala sencilla para decirte hasta dónde vale la pena seguir la pista.</p>
-          </div>
-          <div className="footprint-levels">
-            {[
-              { count: 1, title: 'Buena pista', copy: 'Un lugar honesto que vale la visita.' },
-              { count: 2, title: 'Gran hallazgo', copy: 'Calidad consistente y carácter propio.' },
-              { count: 3, title: 'Deja huella', copy: 'Una experiencia que ayuda a entender su destino.' },
-            ].map((level) => (
-              <div className="footprint-level" key={level.count}>
-                <Footprints count={level.count} />
-                <h3>{level.title}</h3>
-                <p>{level.copy}</p>
-              </div>
-            ))}
-          </div>
-          <div className="independence-note">
-            <span><PawPrint /></span>
-            <p><strong>Lo editorial no está a la venta.</strong> Las marcas pueden apoyar nuestro trabajo, pero nunca comprar una huella.</p>
-            <Link href="/metodologia">Leer la metodología <ArrowRight /></Link>
           </div>
         </div>
       </section>

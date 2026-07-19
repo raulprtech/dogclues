@@ -7,6 +7,7 @@
 - Configurar las variables de Sanity en Netlify.
 - Abrir `/studio` y publicar en este orden: estados o regiones, ciudades, categorías, perfil fundador, lugares, artículos y guía.
 - Completar texto alternativo, fecha de verificación y notas de fuente antes de publicar cada lugar.
+- Asignar una sección editorial a cada artículo existente para que aparezca en su portada temática.
 - Confirmar que las páginas públicas muestran contenido de Sanity y ya no la etiqueta de muestra.
 
 ## 2. Supabase
@@ -21,13 +22,22 @@
 - Confirmar que los roles `anon` y `authenticated` no pueden leer las tablas privadas.
 - Revisar el aviso de privacidad con asesoría jurídica antes de una campaña pública.
 
-## 3. Umami
+## 3. Beehiiv
+
+- Crear la publicación y una clave con permiso `subscriptions:write`.
+- Configurar `BEEHIIV_API_KEY`, `BEEHIIV_PUBLICATION_ID` y las listas opcionales en Netlify.
+- Mantener la política de doble confirmación de la publicación; DogClues envía `double_opt_override: not_set`.
+- Enviar una suscripción de prueba y confirmar que `beehiiv_subscription_id` se guarda en Supabase.
+- Ejecutar `npm run newsletter:sync` para reintentar hasta 100 registros suscritos que todavía no tengan identificador de Beehiiv.
+- Confirmar que ningún secreto de Beehiiv usa el prefijo `NEXT_PUBLIC_`.
+
+## 4. Umami
 
 - Crear el sitio en Umami y configurar ID y URL del script.
 - Confirmar pageviews y los eventos `article_view`, `article_read_75`, `place_view`, `guide_view`, `category_filter`, `search_submit`, `destination_request`, `recommendation_submit`, `business_application_submit` y `newsletter_submit`.
 - Revisar que ningún evento contenga correo, nombre, teléfono o texto libre.
 
-## 4. Control editorial
+## 5. Control editorial
 
 - Sustituir todas las piezas de muestra antes de anunciar la revista.
 - Validar enlaces, horarios, teléfonos y coordenadas contra una fuente registrada.
@@ -35,9 +45,8 @@
 - Hacer una revisión móvil y de escritorio de portada, menú de búsqueda, páginas de ciudad, formulario de pistas, postulación de negocio, guía, artículo, lugar, Studio y privacidad.
 - Ejecutar `npm run lint` y `npm run build` antes de publicar.
 
-## 5. Después del lanzamiento
+## 6. Después del lanzamiento
 
-- Conectar Beehiiv mediante un proceso de sincronización con reintentos y registro de errores; Supabase conserva la evidencia primaria de consentimiento.
 - Definir alertas para fichas cuya `lastVerifiedAt` haya vencido.
 - Preparar una vista interna de postulaciones antes de delegar su seguimiento.
 - No habilitar autoservicio, permisos de negocios ni votaciones hasta diseñar autenticación, auditoría y moderación específicas.

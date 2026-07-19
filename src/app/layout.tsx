@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import '../index.css';
+import '../editorial-sections.css';
 import { Footer } from '../components/layout/Footer';
 import { Navbar } from '../components/layout/Navbar';
 import { UmamiAnalytics } from '../components/UmamiAnalytics';

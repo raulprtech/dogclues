@@ -1,3 +1,5 @@
+import type { EditorialSectionSlug } from '../lib/editorial-sections';
+
 export type FootprintRating = 1 | 2 | 3;
 export type ContentSource = 'sanity' | 'demo';
 export type CoverageStatus = 'active' | 'planned' | 'archived';
@@ -113,6 +115,7 @@ export interface Article {
   relatedPlaces?: string[];
   courtesyDeclaration?: string;
   featured?: boolean;
+  editorialSection?: EditorialSectionSlug;
   contentSource?: ContentSource;
 }
 

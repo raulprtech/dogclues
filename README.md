@@ -6,11 +6,12 @@ DogClues es una revista digital de descubrimiento local para encontrar restauran
 
 ## Prioridad de lanzamiento
 
-El producto está preparado alrededor de tres sistemas con responsabilidades separadas:
+El producto está preparado alrededor de cuatro sistemas con responsabilidades separadas:
 
 - **Sanity** es la fuente de verdad para regiones, ciudades, artículos, lugares, guías, perfiles editoriales y reseñas.
 - **Supabase** recibe suscripciones y pistas de nuevos destinos, conserva evidencia de consentimiento y aloja controles operativos de calidad.
 - **Umami** mide lecturas, profundidad de lectura, vistas de lugares, aperturas de guías y filtros sin enviar correos, búsquedas libres ni otros datos personales.
+- **Beehiiv** distribuye el boletín cuando se habilitan sus credenciales; Supabase conserva primero la evidencia de consentimiento y el identificador de sincronización.
 
 Cuando Sanity aún no tiene contenido publicado, el sitio conserva datos de muestra para evitar páginas vacías. Las fichas procedentes de ese respaldo se identifican como contenido de muestra.
 
@@ -22,7 +23,7 @@ El Studio está integrado en `/studio` y separa claramente las fichas de negocio
 - Categorías.
 - Perfiles editoriales públicos, incluida la opción de identidad canina.
 - Lugares con fecha de verificación, fuente interna y datos estructurados.
-- Artículos con Portable Text y declaraciones de cortesía.
+- Artículos con Portable Text, sección editorial y declaraciones de cortesía.
 - Reseñas con cinco dimensiones de evaluación y huellas.
 - Ediciones de guía y patrocinadores.
 
@@ -51,6 +52,8 @@ Configura en Netlify las variables descritas en `.env.example`. Las imprescindib
 - `NEXT_PUBLIC_UMAMI_WEBSITE_ID`
 - `NEXT_PUBLIC_UMAMI_SCRIPT_URL`
 
+Beehiiv es opcional. Para activarlo configura en Netlify `BEEHIIV_API_KEY`, `BEEHIIV_PUBLICATION_ID` y, si aplica, `BEEHIIV_NEWSLETTER_LIST_IDS`. La clave nunca debe exponerse con el prefijo `NEXT_PUBLIC_`.
+
 `SANITY_API_READ_TOKEN` solo es necesario si el dataset no permite lectura pública. La clave secreta de Supabase se usa exclusivamente en el servidor y nunca debe llevar el prefijo `NEXT_PUBLIC_`.
 
 La secuencia exacta de activación y comprobación está en [docs/launch-checklist.md](docs/launch-checklist.md).
@@ -65,6 +68,8 @@ La secuencia exacta de activación y comprobación está en [docs/launch-checkli
 | `/lugares/[slug]` | Fichas verificadas. |
 | `/articulos` | Índice editorial. |
 | `/articulos/[slug]` | Artículos y rutas. |
+| `/secciones/[slug]` | Portadas de las seis secciones editoriales. |
+| `/acerca` | Mascota, propósito y sistema de huellas. |
 | `/metodologia` | Criterios y sistema de huellas. |
 | `/buscar` | Búsqueda por destino y recepción de pistas. |
 | `/destinos/[region]/[city]` | Portada editorial personalizada por ciudad. |
